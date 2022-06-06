@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Montserrat:wght@400&family=Poppins:wght@400&family=Roboto:wght@400&display=swap');
+
+:root {
+    --font-body:  'Lato', 'Poppins', 'Roboto', 'Montserrat', sans-serif;
+    --color-primary: #efefef;
+    --color-black-50: rgba(0, 0, 0, 0.25);
+    --color-button: #48d0b0;
+    --color-button-hover: #3ba58c;
+    --color-white: #ffffff;
+    --color-white-50: rgba(255, 255, 255, 0.5);
+    --color-white-15: rgba(255, 255, 255, 0.15);
+    --color-dark: #424242;
+    --shadow-card: 0 0.3rem 0.5rem #424242;
+    --shadow-profile: 0 0 0.3rem #ffffff;
+    --shadow-input: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html, body, #root {
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: var(--color-dark);
+}
+
+body, #root {
+    background-color: var(--color-primary);
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+ol, ul {
+    list-style: none;
+}
+  
+a {
+    color: inherit;
+    text-decoration: none;
+}
