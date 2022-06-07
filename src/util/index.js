@@ -1,7 +1,4 @@
 import api from '../service';
-import config from '../config';
-
-const largScreen = config.media.largScreen.maxWidth;
 
 function modelResponseError(error) {
     const { data, status, statusText } = error;
@@ -61,7 +58,7 @@ export async function findByName(search) {
 }
 
 export async function findAll(offset = 0, limit = 20) {
-    const data = await api.get(`pokemoXn?offset=${offset}&limit=${limit}`).then((results) => results.data).catch((error) => error);
+    const data = await api.get(`pokemon?offset=${offset}&limit=${limit}`).then((results) => results.data).catch((error) => error);
     return data.response ? modelResponseError(data.response) : modelResponse(data);
 }
 
