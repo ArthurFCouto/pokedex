@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { FaSearch, FaFilter } from 'react-icons/fa';
+import { FaSearch, FaFilter, FaTrashAlt } from 'react-icons/fa';
 import Button from '../../components/button';
-import wallpaper from '../../assets/img/wallpaper.png'
+import wallpaper from '../../assets/img/wallpaper.png';
 import {
     ColumnLeft, ColumnRight, ContainerLanding,
-    CardList, Menu, ContainerSearch
+    CardList, HeaderSearch, ContainerSearch
 } from './styles';
 
 export function Landing({ actionButton = () => { } }) {
     return (
         <ContainerLanding>
-            <ColumnLeft className='revealLeft'>
+            <ColumnLeft>
                 <h1>Qual pokemon você quer <span>escolher</span>?</h1>
                 <h3>Confira aqui, informações sobre mais de 250 pokemons.</h3>
                 <Button
@@ -18,20 +18,20 @@ export function Landing({ actionButton = () => { } }) {
                     action={actionButton}
                 />
             </ColumnLeft>
-            <ColumnRight className='revealRight'>
+            <ColumnRight>
                 <img src={wallpaper} alt='Pokemons' />
             </ColumnRight>
         </ContainerLanding>
     )
 }
 
-export function Search({ actionSearch = () => { }, cards = [], actionNext = () => { } }) {
+export function Search({ actionSearch = () => { }, cards = [], actionNext = () => { }, actionClear = () => { }, researched = false }) {
     const [value, setValue] = useState('');
 
     return (
         <ContainerSearch>
-            <Menu>
-                <h1>São mais de 250 pokemons para você pesquisar e escolher</h1>
+            <HeaderSearch>
+                <h2 className='revealLeft'>São mais de 250 pokemons para você pesquisar e escolher</h2>
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     actionSearch(value);
@@ -45,32 +45,41 @@ export function Search({ actionSearch = () => { }, cards = [], actionNext = () =
                         <FaSearch />
                     </button>
                 </form>
-                <div>
-                    <FaFilter />
-                    <ul>
-                        <li>
-                            <select>
-                                <option value='type'>Tipo</option>
-                            </select>
-                        </li>
-                        <li>
-                            <select>
-                                <option value='order'>Ordem</option>
-                                <option value='toDown'>Crescente</option>
-                                <option value='toUp'>Decrescente</option>
-                            </select>
-                        </li>
-                    </ul>
-                </div>
-            </Menu>
+                <ul className='lineFilter'>
+                    <li className='filter'>
+                        <FaFilter />
+                        <ul>
+                            <li>
+                                <select>
+                                    <option key={'type'} value='type'>Tipo</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select>
+                                    <option key={'order'} value='order'>Ordem</option>
+                                    <option key={'toDown'} value='toDown'>Crescente</option>
+                                    <option key={'toUp'} value='toUp'>Decrescente</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className='clear'>
+                        <FaTrashAlt onClick={() => actionClear()} />
+                    </li>
+                </ul>
+            </HeaderSearch>
             <CardList>
                 {cards}
             </CardList>
-            <Button
-                title={'Carregar mais'}
-                action={actionNext}
-                showImg={true}
-            />
+            {
+                !researched && (
+                    <Button
+                        title={''}
+                        action={actionNext}
+                        showImg={true}
+                    />
+                )
+            }
         </ContainerSearch>
     )
 }

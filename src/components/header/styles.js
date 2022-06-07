@@ -9,6 +9,7 @@ export const ContainerHeader = styled.header`
     border-radius: 0 0 1rem 1rem;
     box-shadow: var(--shadow-card);
     color: var(--color-white);
+    overflow: hidden;
 `;
 
 export const List = styled.ul`
@@ -50,22 +51,22 @@ export const List = styled.ul`
     }
 `;
 
-export const Name = styled.h1`
+export const Name = styled.h2`
     margin: 1rem 0;
     font-weight: 400;
 
-    @media(max-width: ${mobile}) {
+    /* @media(max-width: ${mobile}) {
         font-size: 1.5rem;
-    }
+    }*/
 `;
 
 export const Label = styled.h3`
     margin: 0.5rem 0;
     font-weight: 400;
     
-    @media(max-width: ${mobile}) {
+    /*@media(max-width: ${mobile}) {
         font-size: 0.8rem;
-    }
+    }*/
 `;
 
 export const Ball = styled.div`

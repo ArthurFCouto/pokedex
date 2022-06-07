@@ -50,6 +50,7 @@ export const BodyModal = styled.div`
         @media(max-width: ${mobile}) {
             top: 0;
             z-index: 20;
+            color: var(--color-white);
         }
     }
 
@@ -86,10 +87,6 @@ export const ColumnImage = styled.section`
                 padding: 0.3rem 0.7rem;
                 border-radius: 0.5rem;
                 cursor: default;
-
-                @media(max-width: ${mobile}) {
-                    font-size: 0.6rem;
-                }
             }
         }
     }
@@ -117,9 +114,8 @@ export const ColumnDetails = styled.div`
         cursor: default;
     }
 
-    h1 {
-        margin: 0.8rem 0;
-        letter-spacing: 0.2rem;
+    h2 {
+        margin: 1rem 0;
     }
 
     p {
@@ -154,7 +150,7 @@ export const InfoPokemon = styled.ul`
             column-gap: 5px;
         }
 
-        h5 {
+        h4 {
             margin: 0.5rem 0;
             font-weight: 400;
         }
@@ -183,8 +179,7 @@ export const StatsPokemon = styled.ul`
         column-gap: 5px;
         margin: 0.8rem 0;
 
-        h4 {
-            font-size: 0.8rem;
+        h3 {
             font-weight: 400;
         }
 

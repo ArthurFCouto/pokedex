@@ -5,8 +5,7 @@ const tablet = config.media.tablet.maxWidth;
 const mobile = config.media.mobile.maxWidth;
 const largScreen = config.media.largScreen.maxWidth;
 
-export const ContainerHome = styled.main`
-    display: block;
+export const ContainerHome = styled.div`
     height: 100%;
     width: 100%;
     max-width: ${largScreen};
@@ -14,28 +13,20 @@ export const ContainerHome = styled.main`
     background-color: var(--color-white);
 
     .body {
-        padding: 1rem 1.5rem;
+        padding: ${(props) => props.theme.paddingDefault};
     }
 `;
 
 export const ContainerSearch = styled.section`
+    min-height: calc(100vh - 160px);
+
     button {
         margin: 1rem auto;
     }
 `;
 
-export const Menu = styled.div`
+export const HeaderSearch = styled.div`
     padding: 1rem 0;
-
-    h1 {
-        font-size: 2rem;
-        letter-spacing: 0.2rem;
-
-        @media(max-width: ${mobile}) {
-            font-size: 1.5rem;
-            letter-spacing: 0;
-        }   
-    }
 
     form {
         display: flex;
@@ -43,48 +34,66 @@ export const Menu = styled.div`
         align-items: center;
         width: 100%;
         margin: 1rem 0;
-        padding: 1rem;
         border-radius: 100px;
         box-shadow: var(--shadow-input);
-    }
-
-    div {
-        display: grid;
-        grid-template-columns: 3rem 1fr;
-        align-items: center;
-        height: 3rem;
-        width: 3rem;
-        margin: 1rem 0;
-        padding: 0 1rem;
-        border-radius: 100px;
-        overflow: hidden;
-        box-shadow: var(--shadow-input);
-        transition: all .5s;
-
-        :hover {
-            width: 100%;
-        }
-
-        ul {
-            display: inline-flex;
-            justify-content: flex-end;
-            width: 100%;
-            column-gap: 2rem;
-        }
     }
 
     input {
-        background-color: transparent;
         width: 80%;
         font-size: 1rem;
+        background-color: transparent;
         outline: 0;
+        padding-left: 1rem;
     }
 
     button {
-        margin: 0.5rem;
+        margin: 0.5rem 1rem;
         font-size: 1.5rem;
         background-color: transparent;
         color: var(--color-dark);
+        cursor: pointer;
+    }
+
+    .lineFilter {
+        display: grid;
+        grid-template-columns: 1fr 3rem;
+        color: var(--color-dark);
+
+        .filter {
+            display: grid;
+            grid-template-columns: 3rem 1fr;
+            align-items: center;
+            height: 3rem;
+            width: 3rem;
+            margin: 1rem 0;
+            padding: 0 1rem;
+            border-radius: 100px;
+            overflow: hidden;
+            box-shadow: var(--shadow-input);
+            transition: width .5s;
+
+            :hover {
+                width: 95%;
+            }
+
+            ul {
+                display: inline-flex;
+                justify-content: flex-end;
+                column-gap: 2rem;
+                width: 100%;
+            }
+        }
+
+        .clear {
+            display: grid;
+            place-items: center;
+            height: 3rem;
+            width: 3rem;
+            margin: 1rem 0;
+            padding: 0 1rem;
+            border-radius: 100px;
+            box-shadow: var(--shadow-input);
+        }
     }
 `;
 
@@ -97,12 +106,13 @@ export const CardList = styled.nav`
 
     @media(max-width: ${mobile}) {
         column-gap: 5px;
+        row-gap: 15px;
     }
 `;
 
 export const ContainerLanding = styled.section`
-    display: flex;
-    flex-flow: row nowrap;
+    display: grid;
+    grid-template-columns: 55% 45%;
     height: calc(100vh - 160px);
     
     @media(max-width: ${tablet}) {
@@ -111,12 +121,10 @@ export const ContainerLanding = styled.section`
 `;
 
 export const ColumnLeft = styled.div`
-    width: 55%;
     margin: auto 0;
-    visibility: hidden;
+    animation: slideLeft 2s;
 
     h1 {
-        font-size: 3rem;
         letter-spacing: 0.2rem;
     }
 
@@ -129,29 +137,19 @@ export const ColumnLeft = styled.div`
         margin-left: 0;
     }
 
-    @media(max-width: ${tablet}) {
-        width: auto;
-    }
-
     @media(max-width: ${mobile}) {
-        margin: 1.2rem 0;
+        margin: 1.5rem 0;
 
         h1 {
             margin: 1rem 0;
-            font-size: 2rem;
             letter-spacing: 0;
-        }
-
-        h3 {
-            font-size: 1rem;
         }
     }
 `;
 
 export const ColumnRight = styled.div`
-    width: 45%;
     margin: auto 0;
-    visibility: hidden;
+    animation: slideRight 2s;
 
     img {
         max-width: 90%;
@@ -167,27 +165,7 @@ export const ColumnRight = styled.div`
             bottom: 0;
             right: 0;
             width: 60%;
+            animation: slideRight 2s;
         }
     }
 `;
-
-/*
-    // Mobile
-    @media only screen and(max-widht: 600px) {
-        max-width: 600px;
-    }
-
-    // Tablet
-    @media only screen and(max-widht: 768px) {
-        max-width: 768px;
-    }
-
-    // Laptop
-    @media only screen and(max-widht: 992px) {
-        max-width: 992px;
-    }
-
-    // LargScreen
-    @media only screen and(max-widht: 1200px) {
-        
-    } */

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { FaTimes, FaWeight, FaGripVertical, FaSuperpowers } from 'react-icons/fa';
-import { ContainerModal, BodyModal, ColumnImage,
-    ColumnDetails, InfoPokemon, StatsPokemon, Line } from './styles';
+import {
+    ContainerModal, BodyModal, ColumnImage,
+    ColumnDetails, InfoPokemon, StatsPokemon, Line
+} from './styles';
+import { capitalize } from '../../util';
 
 export function ModalPokemon({ pokemon, show, close }) {
     const [display, setDisplay] = useState(false);
@@ -22,18 +25,18 @@ export function ModalPokemon({ pokemon, show, close }) {
                         <div>
                             <ul>
                                 {
-                                    types.map((type) => (
-                                        <li>{type[0].toUpperCase() + type.substring(1).toLowerCase()}</li>
+                                    types.map((type, index) => (
+                                        <li key={index}>{capitalize(type)}</li>
                                     ))
                                 }
                             </ul>
                         </div>
                     </ColumnImage>
                     <ColumnDetails>
-                        <h3 className='id'>#{id}</h3>
-                        <h1>{name[0].toUpperCase() + name.substring(1).toLowerCase()}</h1>
+                        <h1 className='id'>#{id}</h1>
+                        <h2>{capitalize(name)}</h2>
                         <p>
-                            Pellentesque maecenas vitae vehicula eget. Ultricies ac id massa maecenas nulla arcu lacus. Turpis porttitor.
+                            Details.
                         </p>
                         <InfoPokemon>
                             <li>
@@ -41,29 +44,29 @@ export function ModalPokemon({ pokemon, show, close }) {
                                     <FaWeight />
                                     <strong>{(weight / 10).toFixed(1)} Kg</strong>
                                 </div>
-                                <h5>Peso</h5>
+                                <h4>Peso</h4>
                             </li>
                             <li>
                                 <div>
                                     <FaGripVertical />
                                     <strong>{(height / 10).toFixed(1)} m</strong>
                                 </div>
-                                <h5>Altura</h5>
+                                <h4>Altura</h4>
                             </li>
                             <li>
                                 <div>
                                     <FaSuperpowers />
                                     <strong>{abilities[0]}</strong>
                                 </div>
-                                <h5>Poder Especial</h5>
+                                <h4>Poder Especial</h4>
                             </li>
                         </InfoPokemon>
                         <StatsPokemon>
                             {
                                 stats.map((stat) => (
                                     <li>
-                                        <h4>{stat.name}</h4>
-                                        <h4>{stat.base_stat}</h4>
+                                        <h3>{stat.name}</h3>
+                                        <h3>{stat.base_stat}</h3>
                                         <div>
                                             <Line value={stat.base_stat} stat={stat.name} />
                                         </div>

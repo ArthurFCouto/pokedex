@@ -4,7 +4,8 @@ import pokeball from '../../assets/img/pokeball-3.png'
 const cardNotFount = (
     <Container title='Não encontrado' types='error' className='revealCard'>
         <Title>Ops!</Title>
-        <Types>Nada encontrado</Types>
+        <Types>Deu ruim!</Types>
+        <Types>Error!</Types>
         <span className='id'>
             #404
         </span>

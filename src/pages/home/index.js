@@ -11,6 +11,7 @@ import { Landing, Search } from './components';
 export default function Home() {
     const [card, setCard] = useState([<></>]);
     const [next, setNext] = useState('');
+    const [researched, setResearched] = useState(false);
     const [showModalPokemon, setShowModalPokemon] = useState(false);
     const [pokemon, setPokemon] = useState({});
 
@@ -22,12 +23,8 @@ export default function Home() {
 
     async function handleFindAll() {
         const listPokemons = await findAll(0, 8).catch((error) => error);
-        if (listPokemons.statusText) {
-            setCard(<Card />);
-            return;
-        }
         const { results } = listPokemons;
-        if (results.length > 0) {
+        if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
                 <Card
                     pokemon={pokemon}
@@ -36,6 +33,7 @@ export default function Home() {
                         setShowModalPokemon(true)
                     }}
                 />));
+            setResearched(false);
             setNext(listPokemons.next);
             setCard(pokemons);
             return;
@@ -46,11 +44,7 @@ export default function Home() {
     async function handleFindNext() {
         const listPokemons = await findNaxtPage(next).catch((error) => error);
         const { results } = listPokemons;
-        if (listPokemons.statusText) {
-            setCard(<Card />);
-            return;
-        }
-        if (results.length > 0) {
+        if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
                 <Card
                     pokemon={pokemon}
@@ -67,8 +61,9 @@ export default function Home() {
     }
 
     async function handleFindName(name) {
-        const result = await findByName(name).catch((error)=> error);
-        if(result.statusText) {
+        setResearched(true);
+        const result = await findByName(name).catch((error) => error);
+        if (result.status === 404) {
             setCard(<Card />);
             return;
         }
@@ -100,6 +95,8 @@ export default function Home() {
                     actionSearch={(name) => handleFindName(name)}
                     cards={card}
                     actionNext={handleFindNext}
+                    actionClear={handleFindAll}
+                    researched={researched}
                 />
             </div>
             <Footer />

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
-import { findAll, findByName, findNaxtPage, getBackgroundColor } from '../../util';
+import { capitalize, findAll, findByName, findNaxtPage, getBackgroundColor } from '../../util';
 
-const NOME_POKEMON = 'bulbasaur';
+const NOME_POKEMON = 'Bulbasaur';
 const POKEMON = {
     image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
     abilities: [
@@ -72,16 +72,21 @@ describe('Testando as funções da pasta util', () => {
     it('Verificando se é retornado uma cor ao passar um type', async () => {
         const data = getBackgroundColor('grass');
         expect(data).toEqual('#48d0b0');
-    }, 30000);
+    });
 
-    it('Verificando se é retornado uma cor referente ao primeiro type ao passar um array', async () => {
+    it('Verificando se é retornado uma cor referente ao primeiro type ao passar um array', () => {
         const data = getBackgroundColor(['grass', 'fire']);
         expect(data).toEqual('#48d0b0');
-    }, 30000);
+    });
     */
 
-    it('Verificando se é retornado uma cor padrão ao não passar o type', async () => {
+    it('Verificando se é retornado uma cor padrão ao não passar o type', () => {
         const data = getBackgroundColor();
         expect(data).toEqual('#ffd86f');
-    }, 30000);
+    });
+
+    it('Verificando se a função capitalize retorna a primeira letra maiúscula', () => {
+        const data = capitalize(NOME_POKEMON.toLocaleLowerCase());
+        expect(data).toEqual(NOME_POKEMON);
+    });
 })
