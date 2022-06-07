@@ -3,6 +3,7 @@ import { getBackgroundColor } from '../../util';
 import config from '../../config';
 
 const mobile = config.media.mobile.maxWidth;
+const tablet = config.media.tablet.maxWidth;
 const calcWidth = (value) => `${value * 100 / 200}%`;
 const backgroundColor = (value) => {
     let color;
@@ -35,7 +36,7 @@ export const BodyModal = styled.div`
     position: relative;
     display: inline-flex;
     width: 100%;
-    max-width: ${mobile};
+    max-width: ${tablet};
     background-color: var(--color-white);
     border-radius: 1rem;
     transition: all .2s;
@@ -174,7 +175,7 @@ export const StatsPokemon = styled.ul`
     
     li {
         display: grid;
-        grid-template-columns: 20% 20% 1fr;
+        grid-template-columns: 35% 15% 1fr;
         align-items: center;
         column-gap: 5px;
         margin: 0.8rem 0;

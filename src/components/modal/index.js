@@ -33,7 +33,7 @@ export function ModalPokemon({ pokemon, show, close }) {
                         </div>
                     </ColumnImage>
                     <ColumnDetails>
-                        <h1 className='id'>#{id}</h1>
+                        <span className='id'>#{id}</span>
                         <h2>{capitalize(name)}</h2>
                         <p>
                             Details.
@@ -63,8 +63,8 @@ export function ModalPokemon({ pokemon, show, close }) {
                         </InfoPokemon>
                         <StatsPokemon>
                             {
-                                stats.map((stat) => (
-                                    <li>
+                                stats.map((stat, index) => (
+                                    <li key={index}>
                                         <h3>{stat.name}</h3>
                                         <h3>{stat.base_stat}</h3>
                                         <div>
