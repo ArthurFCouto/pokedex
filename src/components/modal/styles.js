@@ -38,14 +38,13 @@ export const BodyModal = styled.div`
     width: 100%;
     max-width: ${tablet};
     background-color: var(--color-white);
-    border-radius: 1rem;
+    border-radius: var(--border-radius);
     transition: all .2s;
 
     .close {
         position: absolute;
         top: -3rem;
         right: 0;
-        font-size: 3rem;
         cursor: pointer;
 
         @media(max-width: ${mobile}) {
@@ -65,7 +64,7 @@ export const BodyModal = styled.div`
 export const ColumnImage = styled.section`
     width: 50%;
     background-color: ${(props) => getBackgroundColor(props.types)};
-    border-radius: 1rem;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-input);
     color: var(--color-white);
 
@@ -111,7 +110,7 @@ export const ColumnDetails = styled.div`
         right: 1rem;
         color: initial;
         opacity: 0.3;
-        font-weight: bold;
+        font-weight: var(--weight-bold);
         cursor: default;
     }
 
@@ -121,7 +120,7 @@ export const ColumnDetails = styled.div`
 
     p {
         font-size: 0.8rem;
-        font-weight: 400;
+        font-weight: var(--weight-fine);
         margin: 0.8rem 0;
         line-height: 1.1rem;
         text-align: center;
@@ -138,7 +137,7 @@ export const InfoPokemon = styled.ul`
     width: 100%;
     display: inline-flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 1rem 0;
 
     li {
@@ -147,13 +146,13 @@ export const InfoPokemon = styled.ul`
         div {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-around;
             column-gap: 5px;
         }
 
         h4 {
             margin: 0.5rem 0;
-            font-weight: 400;
+            font-weight: var(--weight-fine);
         }
     }
 
@@ -181,7 +180,7 @@ export const StatsPokemon = styled.ul`
         margin: 0.8rem 0;
 
         h3 {
-            font-weight: 400;
+            font-weight: var(--weight-fine);
         }
 
         div {
@@ -193,6 +192,6 @@ export const StatsPokemon = styled.ul`
 export const Line = styled.hr`
     width: ${(props) => calcWidth(props.value)};
     height: 2px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     background-color: ${(props) => backgroundColor(props.stat)};
 `;

@@ -5,7 +5,7 @@ const mobile = config.media.mobile.maxWidth;
 
 export const ContainerHeader = styled.header`
     background-color: var(--color-dark);
-    padding: 1rem 1.5rem;
+    padding: var(--padding-default);
     border-radius: 0 0 1rem 1rem;
     box-shadow: var(--shadow-card);
     color: var(--color-white);
@@ -27,7 +27,7 @@ export const List = styled.ul`
             width: 110px;
             aspect-ratio: 1;
             box-shadow: var(--shadow-profile);
-            border-radius: 1rem;
+            border-radius: var(--border-radius);
             display: grid;
             place-items: center;
             overflow: hidden;
@@ -43,30 +43,23 @@ export const List = styled.ul`
     @media(max-width: ${mobile}) {
         .profile{
             margin-right: 0;
-        }
-
-        .profile .image {
             width: 70px;
+            
+            .image {
+                width: 70px;
+            }
         }
     }
 `;
 
 export const Name = styled.h2`
     margin: 1rem 0;
-    font-weight: 400;
-
-    /* @media(max-width: ${mobile}) {
-        font-size: 1.5rem;
-    }*/
+    font-weight: var(--weight-fine);
 `;
 
 export const Label = styled.h3`
     margin: 0.5rem 0;
-    font-weight: 400;
-    
-    /*@media(max-width: ${mobile}) {
-        font-size: 0.8rem;
-    }*/
+    font-weight: var(--weight-fine);
 `;
 
 export const Ball = styled.div`

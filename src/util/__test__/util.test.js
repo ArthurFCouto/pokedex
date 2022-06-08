@@ -14,15 +14,12 @@ const POKEMON = {
         'poison'
     ],
     stats: [
-        {
-            'base_stat': 45,
-            name: 'hp'
-        },
-        { "base_stat": 49, "name": "attack" },
-        { "base_stat": 49, "name": "defense" },
-        { "base_stat": 65, "name": "special-attack" },
-        { "base_stat": 65, "name": "special-defense" },
-        { "base_stat": 45, "name": "speed" }
+        { 'base_stat': 45, 'name': 'hp' },
+        { 'base_stat': 49, 'name': 'attack' },
+        { 'base_stat': 49, 'name': 'defense' },
+        { 'base_stat': 65, 'name': 'special-attack' },
+        { 'base_stat': 65, 'name': 'special-defense' },
+        { 'base_stat': 45, 'name': 'speed' }
     ],
     height: 7,
     id: 1,
@@ -48,7 +45,7 @@ const RESULT_ERROR = {
 }
 
 describe('Testando as funções da pasta util', () => {
-    /*
+    
     it('Verificando se são exibidos os primeiros 10 pokémons', async () => {
         const data = await findAll(0, 10).then((result) => result).catch((error) => error);
         expect({ ...data, results: [] }).toEqual(RESULT);
@@ -78,7 +75,6 @@ describe('Testando as funções da pasta util', () => {
         const data = getBackgroundColor(['grass', 'fire']);
         expect(data).toEqual('#48d0b0');
     });
-    */
 
     it('Verificando se é retornado uma cor padrão ao não passar o type', () => {
         const data = getBackgroundColor();
@@ -86,7 +82,7 @@ describe('Testando as funções da pasta util', () => {
     });
 
     it('Verificando se a função capitalize retorna a primeira letra maiúscula', () => {
-        const data = capitalize(NOME_POKEMON.toLocaleLowerCase());
+        const data = capitalize(NOME_POKEMON.toLowerCase());
         expect(data).toEqual(NOME_POKEMON);
     });
 })

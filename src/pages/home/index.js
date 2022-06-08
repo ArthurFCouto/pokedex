@@ -10,6 +10,7 @@ import { Landing, Search } from './components';
 
 export default function Home() {
     const [card, setCard] = useState([<></>]);
+    const [loading, setLoading] = useState(false);
     const [next, setNext] = useState('');
     const [researched, setResearched] = useState(false);
     const [showModalPokemon, setShowModalPokemon] = useState(false);
@@ -22,8 +23,10 @@ export default function Home() {
     }
 
     async function handleFindAll() {
+        setLoading(true);
         const listPokemons = await findAll(0, 8).catch((error) => error);
         const { results } = listPokemons;
+        setLoading(false);
         if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
                 <Card
@@ -42,8 +45,10 @@ export default function Home() {
     }
 
     async function handleFindNext() {
+        setLoading(true);
         const listPokemons = await findNaxtPage(next).catch((error) => error);
         const { results } = listPokemons;
+        setLoading(false);
         if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
                 <Card
@@ -62,7 +67,9 @@ export default function Home() {
 
     async function handleFindName(name) {
         setResearched(true);
+        setLoading(true);
         const result = await findByName(name).catch((error) => error);
+        setLoading(false);
         if (result.status === 404) {
             setCard(<Card />);
             return;
@@ -97,6 +104,7 @@ export default function Home() {
                     actionNext={handleFindNext}
                     actionClear={handleFindAll}
                     researched={researched}
+                    loading={loading}
                 />
             </div>
             <Footer />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaTimes, FaWeight, FaGripVertical, FaSuperpowers } from 'react-icons/fa';
+import { IoClose, IoScale, IoEllipsisVertical, IoFlash } from 'react-icons/io5';
 import {
     ContainerModal, BodyModal, ColumnImage,
     ColumnDetails, InfoPokemon, StatsPokemon, Line
@@ -18,13 +18,16 @@ export function ModalPokemon({ pokemon, show, close }) {
         ? (
             <ContainerModal >
                 <BodyModal >
-                    <div className='close' onClick={() => close()} >
-                        <FaTimes />
+                    <div data-testid='close' className='close' onClick={() => close()} >
+                        <h1>
+                            <IoClose />
+                        </h1>
                     </div>
                     <ColumnImage types={types} backgroundImage={image}>
                         <div>
                             <ul>
                                 {
+                                    Array.isArray(types) &&
                                     types.map((type, index) => (
                                         <li key={index}>{capitalize(type)}</li>
                                     ))
@@ -36,26 +39,26 @@ export function ModalPokemon({ pokemon, show, close }) {
                         <span className='id'>#{id}</span>
                         <h2>{capitalize(name)}</h2>
                         <p>
-                            Details.
+                            Details
                         </p>
                         <InfoPokemon>
                             <li>
                                 <div>
-                                    <FaWeight />
+                                    <IoScale />
                                     <strong>{(weight / 10).toFixed(1)} Kg</strong>
                                 </div>
                                 <h4>Peso</h4>
                             </li>
                             <li>
                                 <div>
-                                    <FaGripVertical />
+                                    <IoEllipsisVertical />
                                     <strong>{(height / 10).toFixed(1)} m</strong>
                                 </div>
                                 <h4>Altura</h4>
                             </li>
                             <li>
                                 <div>
-                                    <FaSuperpowers />
+                                    <IoFlash />
                                     <strong>{abilities[0]}</strong>
                                 </div>
                                 <h4>Poder Especial</h4>
@@ -63,10 +66,11 @@ export function ModalPokemon({ pokemon, show, close }) {
                         </InfoPokemon>
                         <StatsPokemon>
                             {
+                                Array.isArray(stats) &&
                                 stats.map((stat, index) => (
                                     <li key={index}>
-                                        <h3>{stat.name}</h3>
-                                        <h3>{stat.base_stat}</h3>
+                                        <h4>{stat.name}</h4>
+                                        <h4>{stat.base_stat}</h4>
                                         <div>
                                             <Line value={stat.base_stat} stat={stat.name} />
                                         </div>

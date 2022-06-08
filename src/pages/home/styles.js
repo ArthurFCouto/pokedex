@@ -13,7 +13,7 @@ export const ContainerHome = styled.div`
     background-color: var(--color-white);
 
     .body {
-        padding: ${(props) => props.theme.paddingDefault};
+        padding: var(--padding-default);
     }
 `;
 
@@ -79,7 +79,7 @@ export const HeaderSearch = styled.div`
             ul {
                 display: inline-flex;
                 justify-content: flex-end;
-                column-gap: 2rem;
+                column-gap: 5px;
                 width: 100%;
             }
         }
@@ -103,6 +103,8 @@ export const CardList = styled.nav`
     column-gap: 10px;
     row-gap: 25px;
     justify-content: space-around;
+    opacity: ${(props)=> props.loading ? 0.5 : 1};
+    pointer-events: ${(props)=> props.loading ? 'none' : 'alto'};
 
     @media(max-width: ${mobile}) {
         column-gap: 5px;
@@ -125,12 +127,12 @@ export const ColumnLeft = styled.div`
     animation: slideLeft 2s;
 
     h1 {
-        letter-spacing: 0.2rem;
+        letter-spacing: var(--lt-spacing);
     }
 
     h3 {
         margin: 1.5rem 0;
-        font-weight: 400;
+        font-weight: var(--weight-fine);
     }
 
     button {

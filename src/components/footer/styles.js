@@ -7,7 +7,7 @@ export const ContainerFooter = styled.footer`
     display: grid;
     place-items: center;
     background-color: var(--color-dark);
-    padding: 1rem 1.5rem;
+    padding: var(--padding-default);
     border-radius: 1rem 1rem 0 0;
     color: var(--color-white);
 

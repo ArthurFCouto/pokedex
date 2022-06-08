@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaSearch, FaFilter, FaTrashAlt } from 'react-icons/fa';
+import { IoFilterSharp, IoRepeat, IoSearch } from 'react-icons/io5';
 import Button from '../../components/button';
 import wallpaper from '../../assets/img/wallpaper.png';
 import {
@@ -15,7 +15,7 @@ export function Landing({ actionButton = () => { } }) {
                 <h3>Confira aqui, informações sobre mais de 250 pokemons.</h3>
                 <Button
                     title={'Buscar pokemons'}
-                    action={actionButton}
+                    action={actionButton} 
                 />
             </ColumnLeft>
             <ColumnRight>
@@ -25,7 +25,7 @@ export function Landing({ actionButton = () => { } }) {
     )
 }
 
-export function Search({ actionSearch = () => { }, cards = [], actionNext = () => { }, actionClear = () => { }, researched = false }) {
+export function Search({ actionSearch = () => { }, cards = [], actionNext = () => { }, actionClear = () => { }, researched = false, loading = false }) {
     const [value, setValue] = useState('');
 
     return (
@@ -38,16 +38,16 @@ export function Search({ actionSearch = () => { }, cards = [], actionNext = () =
                 }} >
                     <input
                         type='text'
-                        placeholder='Bulbasaur'
+                        placeholder='Pesquisar pokemon'
                         value={value}
                         onChange={(e) => { setValue(e.target.value) }} />
                     <button type='submit'>
-                        <FaSearch />
+                        <IoSearch />
                     </button>
                 </form>
                 <ul className='lineFilter'>
                     <li className='filter'>
-                        <FaFilter />
+                        <IoFilterSharp />
                         <ul>
                             <li>
                                 <select>
@@ -64,11 +64,11 @@ export function Search({ actionSearch = () => { }, cards = [], actionNext = () =
                         </ul>
                     </li>
                     <li className='clear'>
-                        <FaTrashAlt onClick={() => actionClear()} />
+                        <IoRepeat onClick={() => actionClear()} />
                     </li>
                 </ul>
             </HeaderSearch>
-            <CardList>
+            <CardList loading={loading}>
                 {cards}
             </CardList>
             {

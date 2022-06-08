@@ -6,20 +6,21 @@ const mobile = config.media.mobile.maxWidth;
 
 export const Container = styled.div`
     width: 100%;
-    min-width: ${(props) => props.theme.limitSize.card.minWidth};
-    max-width: ${(props) => props.theme.limitSize.card.maxWidth};
+    min-width: var(--minWidth-card);
+    max-width: var(--maxWidth-card);
     aspect-ratio: 13/9;
-    border-radius: 1rem;
+    border-radius: var(--border-radius);
     padding: 1rem;
     color: var(--color-white);
     background-color: ${(props) => getBackgroundColor(props.types)};
     position: relative;
     display: flex;
     flex-direction: column;
-    row-gap: 0.5rem;
+    row-gap: 5px;
     align-items: baseline;
     overflow: hidden;
     transition: box-shadow .2s;
+    animation: fadeIn 1s;
 
     .id {
         position: absolute;
@@ -27,7 +28,7 @@ export const Container = styled.div`
         right: 1rem;
         color: initial;
         opacity: 0.3;
-        font-weight: bold;
+        font-weight: var(--weight-bold);
         cursor: default;
     }
 
@@ -67,7 +68,7 @@ export const Container = styled.div`
 
 export const Title = styled.h3`
     margin-top: 1rem;
-    letter-spacing: 0.2rem;
+    letter-spacing: var(--lt-spacing);
     cursor: pointer;
 
     @media(max-width: ${mobile}) {
@@ -76,14 +77,10 @@ export const Title = styled.h3`
     }
 `;
 
-export const Types = styled.h4`
-    font-weight: 400;
+export const Types = styled.h5`
+    font-weight: var(--weight-fine);
     background-color: var(--color-white-15);
     padding: 0.3rem 0.7rem;
     border-radius: 0.5rem;
     cursor: default;
-
-    @media(max-width: ${mobile}) {
-        font-size: 0.6rem;
-    }
 `;

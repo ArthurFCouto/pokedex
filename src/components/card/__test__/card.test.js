@@ -14,15 +14,12 @@ const POKEMON = {
         'poison'
     ],
     stats: [
-        {
-            'base_stat': 45,
-            name: 'hp'
-        },
-        { "base_stat": 49, "name": "attack" },
-        { "base_stat": 49, "name": "defense" },
-        { "base_stat": 65, "name": "special-attack" },
-        { "base_stat": 65, "name": "special-defense" },
-        { "base_stat": 45, "name": "speed" }
+        { 'base_stat': 45, 'name': 'hp' },
+        { 'base_stat': 49, 'name': 'attack' },
+        { 'base_stat': 49, 'name': 'defense' },
+        { 'base_stat': 65, 'name': 'special-attack' },
+        { 'base_stat': 65, 'name': 'special-defense' },
+        { 'base_stat': 45, 'name': 'speed' }
     ],
     height: 7,
     id: 1,
