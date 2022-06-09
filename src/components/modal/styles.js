@@ -62,7 +62,7 @@ export const BodyModal = styled.div`
 
 export const ColumnImage = styled.section`
     width: 50%;
-    background-color: ${(props) => props.theme.colors.backgroundCard[props.types] || 'var(--color-primary)'};
+    background-color: ${(props) => props.theme.colors.backgroundCard[props.types] || 'var(--color-dark)'};
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-input);
     color: var(--color-white);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ContainerHome } from './styles';
-import { findAll, findByName, findByTypes, findNaxtPage, getTypes } from '../../util';
+import { findAll, findByName, findByTypes } from '../../util';
 import Card from '../../components/card';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -11,10 +11,10 @@ import { Landing, Search } from './components';
 export default function Home() {
     const [card, setCard] = useState([<></>]);
     const [loading, setLoading] = useState(false);
-    const [next, setNext] = useState('');
     const [researched, setResearched] = useState(false);
     const [showModalPokemon, setShowModalPokemon] = useState(false);
     const [pokemon, setPokemon] = useState({});
+    const [limit, setLimit] = useState(8);
 
     function linkToSearch() {
         window.scrollTo({
@@ -26,6 +26,7 @@ export default function Home() {
         setLoading(true);
         const listPokemons = await findAll(8, 0).catch((error) => error);
         const { results } = listPokemons;
+        setLimit(8);
         setLoading(false);
         if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
@@ -37,7 +38,6 @@ export default function Home() {
                     }}
                 />));
             setResearched(false);
-            setNext(listPokemons.next);
             setCard(pokemons);
             return;
         }
@@ -45,9 +45,13 @@ export default function Home() {
     }
 
     async function handleFindNext() {
+        if(loading) {
+            return;
+        }
         setLoading(true);
-        const listPokemons = await findNaxtPage(next).catch((error) => error);
+        const listPokemons = await findAll(8, limit).catch((error) => error);
         const { results } = listPokemons;
+        setLimit(limit+8);
         setLoading(false);
         if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
@@ -58,7 +62,6 @@ export default function Home() {
                         setShowModalPokemon(true)
                     }}
                 />));
-            setNext(listPokemons.next);
             setCard([...card, pokemons]);
             return;
         }

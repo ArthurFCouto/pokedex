@@ -61,18 +61,12 @@ export async function findByName(search) {
     return data.response ? modelResponseError(data.response) : modelResponsePokemon(data);
 }
 
-export async function findAll(limit = 20, offset = 0) {
+export async function findAll(limit, offset) {
     const data = await api.get('pokemon', {
         params: {
           limit: limit,
           offset: offset,
         }}).then((results) => results.data).catch((error) => error);
-    return data.response ? modelResponseError(data.response) : modelResponse(data);
-}
-
-export async function findNaxtPage(url) {
-    const src = url.slice(26, url.length - 1);
-    const data = await api.get(src).then((results) => results.data).catch((error) => error);
     return data.response ? modelResponseError(data.response) : modelResponse(data);
 }
 

@@ -23,7 +23,7 @@ export function ModalPokemon({ pokemon, show, close }) {
                             <IoClose />
                         </h1>
                     </div>
-                    <ColumnImage types={types} backgroundImage={image}>
+                    <ColumnImage types={types[0]} backgroundImage={image}>
                         <div>
                             <ul>
                                 {
