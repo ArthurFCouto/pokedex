@@ -12,17 +12,21 @@ function modelResponseError(error) {
 }
 
 async function modelResponse(data) {
-    const { count, next, previous } = data;
+    const { count, next, previous, pokemon } = data;
+    const list = pokemon || data.results;
     const results = [];
-    for (let item of data.results) {
-        const { url } = item;
-        const src = url.slice(26, url.length - 1);
+    for (let item of list) {
+        const { url, pokemon } = item;
+        const src = url ? url.slice(26, url.length - 1) : pokemon.url.slice(26, pokemon.url.length - 1);
         const details = await api.get(src).then((results) => results.data).catch((error) => error);
         if (details.response) {
             console.log('Houve um erro ao buscar os detalhes do pokemon: ', details.response);
             continue;
         }
         results.push(modelResponsePokemon(details));
+        if(pokemon && results.length === 12) {
+            break;
+        }
     }
     return {
         count,
@@ -57,8 +61,12 @@ export async function findByName(search) {
     return data.response ? modelResponseError(data.response) : modelResponsePokemon(data);
 }
 
-export async function findAll(offset = 0, limit = 20) {
-    const data = await api.get(`pokemon?offset=${offset}&limit=${limit}`).then((results) => results.data).catch((error) => error);
+export async function findAll(limit = 20, offset = 0) {
+    const data = await api.get('pokemon', {
+        params: {
+          limit: limit,
+          offset: offset,
+        }}).then((results) => results.data).catch((error) => error);
     return data.response ? modelResponseError(data.response) : modelResponse(data);
 }
 
@@ -68,48 +76,16 @@ export async function findNaxtPage(url) {
     return data.response ? modelResponseError(data.response) : modelResponse(data);
 }
 
-export function getBackgroundColor(types) {
-    let color;
-    const type = Array.isArray(types) ? types[0] : types;
-    switch (type) {
-        case 'grass':
-            color = '#48d0b0';
-            break;
-        case 'fire':
-            color = '#fb6c6c';
-            break;
-        case 'water':
-            color = '#77bdfe';
-            break;
-        case 'bug':
-            color = '#b6de76';
-            break;
-        case 'normal':
-            color = '#b1736d';
-            break;
-        case 'fighting':
-            color = '#888888';
-            break;
-        case 'poison':
-            color = '#6bd8be';
-            break;
-        case 'flairy':
-            color = '#f2cdd6';
-            break;
-        case 'flying':
-            color = '#a499c1';
-            break;
-        case 'psychic':
-            color = '#ce8083';
-            break;
-        case 'error':
-            color = '#424242';
-            break;
-        default:
-            color = '#ffd86f';
-    }
-    return color;
-};
+export async function getTypes() {
+    const data = await api.get('type').then((results) => results.data).catch((error) => error);
+    return data.response ? modelResponseError(data.response) : {data: data.results};
+}
+
+export async function findByTypes(url) {
+    const src = url.slice(26, url.length - 1);
+    const data = await api.get(src).then((results) => results.data).catch((error) => error);
+    return data.response ? modelResponseError(data.response) : modelResponse(data);
+}
 
 export function capitalize(value) {
     if (!isNaN(value)) {

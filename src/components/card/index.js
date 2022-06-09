@@ -21,7 +21,7 @@ export default function Card({ pokemon, action = () => { } }) {
     try {
         const { name, types, id, image } = pokemon;
         return (
-            <Container title={name} types={types} onClick={() => action()} className='revealCard'>
+            <Container title={name} types={types[0]} onClick={() => action()} className='revealCard'>
                 <Title>{capitalize(name)}</Title>
                 {
                     types.map((type, index) => (

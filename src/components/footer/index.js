@@ -7,7 +7,7 @@ export default function Footer() {
         <ContainerFooter>
             <img src={pokemon} alt='Pokemon' />
             <Info data-testid='aside'>
-                <div>© 2022 Developed and created by Arthur Couto</div>
+                <h5>© 2022 Developed and created by Arthur Couto</h5>
                 <ul>
                     <li data-testid='li'>
                         <a href='https://github.com/ArthurFCouto/'><FaGithub /></a>

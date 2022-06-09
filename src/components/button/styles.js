@@ -20,8 +20,8 @@ export const Container = styled.button`
     }
     
     img {
-        max-width: 2.5rem;
-        max-height: 2.5rem;
+        max-width: 1rem;
+        max-height: 1rem;
     }
 
     @media(max-width: ${mobile}) {

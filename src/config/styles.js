@@ -5,7 +5,7 @@ const mobile = config.media.mobile.maxWidth;
 
 const GlobalStyle = createGlobalStyle`
     :root {
-        --font-body:  'Lato', 'Poppins', 'Roboto', 'Montserrat', sans-serif;
+        --font-body:  'Roboto', 'Lato', 'Poppins', 'Montserrat', sans-serif;
         --color-primary: #efefef;
         --color-button: #48d0b0;
         --color-button-hover: #3ba58c;
@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
         --shadow-profile: 0 0 0.3rem #ffffff;
         --shadow-input: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.25);
         --border-radius: 1rem;
-        --weight-fine: 400;
         --weight-bold: bold;
         --padding-default: 1rem 1.5rem;
         --lt-spacing: 0.2rem;
@@ -54,6 +53,10 @@ const GlobalStyle = createGlobalStyle`
     a {
         color: inherit;
         text-decoration: none;
+    }
+
+    h1, h2, h3, h4, h5 {
+        font-weight: 400;
     }
 
     h1 {

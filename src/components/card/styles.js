@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import config from '../../config';
-import { getBackgroundColor } from '../../util';
 
 const mobile = config.media.mobile.maxWidth;
 
@@ -12,7 +11,7 @@ export const Container = styled.div`
     border-radius: var(--border-radius);
     padding: 1rem;
     color: var(--color-white);
-    background-color: ${(props) => getBackgroundColor(props.types)};
+    background-color: ${(props) => props.theme.colors.backgroundCard[props.types] || 'var(--color-dark)'};
     position: relative;
     display: flex;
     flex-direction: column;
@@ -38,6 +37,7 @@ export const Container = styled.div`
         right: .5rem;
         width: 50%;
         height: 50%;
+        z-index: 15;
     }
 
     .notFound {
@@ -71,6 +71,10 @@ export const Title = styled.h3`
     letter-spacing: var(--lt-spacing);
     cursor: pointer;
 
+    @media(min-width: ${mobile}) {
+        font-weight: var(--weight-bold);
+    }
+
     @media(max-width: ${mobile}) {
         margin-top: 0.5rem;
         letter-spacing: 0;
@@ -78,7 +82,6 @@ export const Title = styled.h3`
 `;
 
 export const Types = styled.h5`
-    font-weight: var(--weight-fine);
     background-color: var(--color-white-15);
     padding: 0.3rem 0.7rem;
     border-radius: 0.5rem;

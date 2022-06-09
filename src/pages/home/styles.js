@@ -28,6 +28,10 @@ export const ContainerSearch = styled.section`
 export const HeaderSearch = styled.div`
     padding: 1rem 0;
 
+    h2 {
+        font-weight: var(--weight-bold);
+    }
+
     form {
         display: flex;
         justify-content: space-between;
@@ -93,6 +97,7 @@ export const HeaderSearch = styled.div`
             padding: 0 1rem;
             border-radius: 100px;
             box-shadow: var(--shadow-input);
+            cursor: pointer;
         }
     }
 `;
@@ -128,11 +133,11 @@ export const ColumnLeft = styled.div`
 
     h1 {
         letter-spacing: var(--lt-spacing);
+        font-weight: var(--weight-bold);
     }
 
     h3 {
         margin: 1.5rem 0;
-        font-weight: var(--weight-fine);
     }
 
     button {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoFilterSharp, IoRepeat, IoSearch } from 'react-icons/io5';
 import Button from '../../components/button';
 import wallpaper from '../../assets/img/wallpaper.png';
@@ -6,6 +6,7 @@ import {
     ColumnLeft, ColumnRight, ContainerLanding,
     CardList, HeaderSearch, ContainerSearch
 } from './styles';
+import { getTypes } from '../../util';
 
 export function Landing({ actionButton = () => { } }) {
     return (
@@ -15,7 +16,7 @@ export function Landing({ actionButton = () => { } }) {
                 <h3>Confira aqui, informações sobre mais de 250 pokemons.</h3>
                 <Button
                     title={'Buscar pokemons'}
-                    action={actionButton} 
+                    action={actionButton}
                 />
             </ColumnLeft>
             <ColumnRight>
@@ -25,8 +26,36 @@ export function Landing({ actionButton = () => { } }) {
     )
 }
 
-export function Search({ actionSearch = () => { }, cards = [], actionNext = () => { }, actionClear = () => { }, researched = false, loading = false }) {
+export function Search({
+    actionSearch = () => { },
+    actionNext = () => { },
+    actionClear = () => { },
+    actionFindType = () => { },
+    cards = [],
+    researched = false,
+    loading = false }) {
     const [value, setValue] = useState('');
+    const [types, setTypes] = useState([]);
+
+    function handleActionClear() {
+        actionClear()
+        setValue('');
+    };
+
+    function handleActionType(url) {
+        if (url !== 'type') {
+            actionFindType(url)
+            setValue('');
+        }
+    };
+
+    async function getAllTypes() {
+        await getTypes().then((response) => setTypes(response.data)).catch((error) => console.log(error));
+    }
+
+    useEffect(() => {
+        getAllTypes();
+    })
 
     return (
         <ContainerSearch>
@@ -50,21 +79,19 @@ export function Search({ actionSearch = () => { }, cards = [], actionNext = () =
                         <IoFilterSharp />
                         <ul>
                             <li>
-                                <select>
+                                <select onChange={(e) => handleActionType(e.target.value)}>
                                     <option key={'type'} value='type'>Tipo</option>
-                                </select>
-                            </li>
-                            <li>
-                                <select>
-                                    <option key={'order'} value='order'>Ordem</option>
-                                    <option key={'toDown'} value='toDown'>Crescente</option>
-                                    <option key={'toUp'} value='toUp'>Decrescente</option>
+                                    {
+                                        types.map((type) => (
+                                            <option key={type.name} value={type.url}>{type.name}</option>
+                                        ))
+                                    }
                                 </select>
                             </li>
                         </ul>
                     </li>
                     <li className='clear'>
-                        <IoRepeat onClick={() => actionClear()} />
+                        <IoRepeat onClick={() => handleActionClear()} />
                     </li>
                 </ul>
             </HeaderSearch>

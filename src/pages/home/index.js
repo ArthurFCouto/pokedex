@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ContainerHome } from './styles';
-import { findAll, findByName, findNaxtPage } from '../../util';
+import { findAll, findByName, findByTypes, findNaxtPage, getTypes } from '../../util';
 import Card from '../../components/card';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -24,7 +24,7 @@ export default function Home() {
 
     async function handleFindAll() {
         setLoading(true);
-        const listPokemons = await findAll(0, 8).catch((error) => error);
+        const listPokemons = await findAll(8, 0).catch((error) => error);
         const { results } = listPokemons;
         setLoading(false);
         if (results && results.length > 0) {
@@ -68,6 +68,7 @@ export default function Home() {
     async function handleFindName(name) {
         setResearched(true);
         setLoading(true);
+        name = name.toLowerCase();
         const result = await findByName(name).catch((error) => error);
         setLoading(false);
         if (result.status === 404) {
@@ -86,8 +87,32 @@ export default function Home() {
         return;
     }
 
+    async function handleFindType(url) {
+        setResearched(true);
+        setLoading(true);
+        const listPokemons = await findByTypes(url).then((response) => response.results).catch((error) => error);
+        setLoading(false);
+        if (listPokemons.status === 404) {
+            setCard(<Card />);
+            return;
+        }
+        if (listPokemons && listPokemons.length > 0) {
+            const pokemons = listPokemons.map((pokemon) => (
+                <Card
+                    pokemon={pokemon}
+                    action={() => {
+                        setPokemon(pokemon);
+                        setShowModalPokemon(true)
+                    }}
+                />));
+            setCard(pokemons);
+            return;
+        }
+        setCard(<Card />);
+        return;
+    }
+
     useEffect(() => {
-        // alert('Largura da tela: ' + window.innerWidth);
         handleFindAll();
     }, []);
 
@@ -100,9 +125,10 @@ export default function Home() {
                 />
                 <Search
                     actionSearch={(name) => handleFindName(name)}
-                    cards={card}
                     actionNext={handleFindNext}
                     actionClear={handleFindAll}
+                    actionFindType={(url) => handleFindType(url)}
+                    cards={card}
                     researched={researched}
                     loading={loading}
                 />

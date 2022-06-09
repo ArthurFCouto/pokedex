@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { capitalize, findAll, findByName, findNaxtPage, getBackgroundColor } from '../../util';
+import { capitalize, findAll, findByName, findByTypes, findNaxtPage, getTypes } from '../../util';
 
 const NOME_POKEMON = 'Bulbasaur';
 const POKEMON = {
@@ -43,11 +43,14 @@ const RESULT_ERROR = {
     status: 404,
     statusText: 'Not Found'
 }
+const LENGTH_TYPES = 20;
+const TYPE = 'normal';
+const TYPE_EXPECTED_COUNT = 12;
 
 describe('Testando as funções da pasta util', () => {
-    
+
     it('Verificando se são exibidos os primeiros 10 pokémons', async () => {
-        const data = await findAll(0, 10).then((result) => result).catch((error) => error);
+        const data = await findAll(10, 0).then((result) => result).catch((error) => error);
         expect({ ...data, results: [] }).toEqual(RESULT);
     }, 30000);
 
@@ -66,23 +69,18 @@ describe('Testando as funções da pasta util', () => {
         expect({ ...data, results: [] }).toEqual(RESULT_NEXT);
     }, 30000);
 
-    it('Verificando se é retornado uma cor ao passar um type', async () => {
-        const data = getBackgroundColor('grass');
-        expect(data).toEqual('#48d0b0');
-    });
-
-    it('Verificando se é retornado uma cor referente ao primeiro type ao passar um array', () => {
-        const data = getBackgroundColor(['grass', 'fire']);
-        expect(data).toEqual('#48d0b0');
-    });
-
-    it('Verificando se é retornado uma cor padrão ao não passar o type', () => {
-        const data = getBackgroundColor();
-        expect(data).toEqual('#ffd86f');
-    });
-
     it('Verificando se a função capitalize retorna a primeira letra maiúscula', () => {
         const data = capitalize(NOME_POKEMON.toLowerCase());
         expect(data).toEqual(NOME_POKEMON);
     });
+
+    it('Verificando se a função getType retorna uma lista com a quantidade indicada na API', async () => {
+        const data = await getTypes().then((response) => response.data).catch((error) => error);
+        expect(data.length).toBe(LENGTH_TYPES);
+    }, 30000);
+
+    it('Verificando se é retornado os 12 primeiros pokemons da lista por tipo', async () => {
+        const data = await findByTypes(TYPE).then((response) => response.data).catch((error) => error);
+        expect(data.results.length).toEqual(TYPE_EXPECTED_COUNT);
+    }, 30000);
 })

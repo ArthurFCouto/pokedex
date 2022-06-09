@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getBackgroundColor } from '../../util';
 import config from '../../config';
 
 const mobile = config.media.mobile.maxWidth;
@@ -63,7 +62,7 @@ export const BodyModal = styled.div`
 
 export const ColumnImage = styled.section`
     width: 50%;
-    background-color: ${(props) => getBackgroundColor(props.types)};
+    background-color: ${(props) => props.theme.colors.backgroundCard[props.types] || 'var(--color-primary)'};
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-input);
     color: var(--color-white);
@@ -120,7 +119,6 @@ export const ColumnDetails = styled.div`
 
     p {
         font-size: 0.8rem;
-        font-weight: var(--weight-fine);
         margin: 0.8rem 0;
         line-height: 1.1rem;
         text-align: center;
@@ -152,7 +150,6 @@ export const InfoPokemon = styled.ul`
 
         h4 {
             margin: 0.5rem 0;
-            font-weight: var(--weight-fine);
         }
     }
 
@@ -178,10 +175,6 @@ export const StatsPokemon = styled.ul`
         align-items: center;
         column-gap: 5px;
         margin: 0.8rem 0;
-
-        h3 {
-            font-weight: var(--weight-fine);
-        }
 
         div {
             width: 100%;

@@ -54,12 +54,10 @@ export const List = styled.ul`
 
 export const Name = styled.h2`
     margin: 1rem 0;
-    font-weight: var(--weight-fine);
 `;
 
 export const Label = styled.h3`
     margin: 0.5rem 0;
-    font-weight: var(--weight-fine);
 `;
 
 export const Ball = styled.div`
