@@ -82,9 +82,10 @@ export function Search({
                                 <select onChange={(e) => handleActionType(e.target.value)}>
                                     <option key={'type'} value='type'>Tipo</option>
                                     {
-                                        types.map((type) => (
-                                            <option key={type.name} value={type.url}>{type.name}</option>
-                                        ))
+                                        Array.isArray(types) &&
+                                            types.map((type) => (
+                                                <option key={type.name} value={type.url}>{type.name}</option>
+                                            ))
                                     }
                                 </select>
                             </li>
