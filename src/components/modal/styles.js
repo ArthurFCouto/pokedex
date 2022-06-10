@@ -87,7 +87,7 @@ export const ColumnImage = styled.section`
     @media(max-width: ${mobile}) {
         width: 100%;
         transition: height .5s;
-        height: ${(props) => props.imageView ? height / 2 + 'px' : height + 'px'};
+        height: ${(props) => props.imageView ? height + 'px' : height / 2 + 'px'};
         border-radius: 0 0 1rem 1rem;
         cursor: pointer;
     }

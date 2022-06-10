@@ -40,15 +40,16 @@ export function Search({
     const [types, setTypes] = useState([]);
 
     function handleActionClear() {
-        actionClear()
         setValue('');
         setSelected(8);
+        actionClear();
     };
 
     function handleActionType(url) {
         if (url !== 'type') {
-            actionFindType(url)
             setValue('');
+            setSelected(12);
+            actionFindType(url);
         }
     };
 
