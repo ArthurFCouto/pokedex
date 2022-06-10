@@ -1,20 +1,68 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { ContainerHome } from './styles';
-import { findAll, findByName, findByTypes } from '../../util';
-import Card from '../../components/card';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
-
-import { ModalPokemon } from '../../components/modal';
 import { Landing, Search } from './components';
+import { findAll, findByName, findByTypes } from '../../util';
+import { ModalLogin, ModalPokemon } from '../../components/modal';
+import Header from '../../components/header';
+import Card from '../../components/card';
+import Footer from '../../components/footer';
+import profile from '../../assets/img/profile.png';
 
 export default function Home() {
     const [card, setCard] = useState([<></>]);
     const [loading, setLoading] = useState(false);
     const [researched, setResearched] = useState(false);
     const [showModalPokemon, setShowModalPokemon] = useState(false);
+    const [showModalLogin, setShowModalLogin] = useState(false);
     const [pokemon, setPokemon] = useState({});
-    const [limit, setLimit] = useState(8);
+    const [pagination, dispatchPagination] = useReducer(Pagination, {
+        limit: 8,
+        offSet: 0
+    });
+
+    function Pagination(state, action) {
+        const { actionType, limit, offSet } = action;
+        switch (actionType) {
+            case 'next':
+                return {
+                    ...state,
+                    offSet,
+                }
+            case 'alter':
+                return {
+                    ...state,
+                    limit
+                }
+            default:
+                return {
+                    limit: 8,
+                    offSet: 0
+                };
+        }
+    }
+
+    const [user, dispatchUser] = useReducer(User, {
+        name: 'Ash Ketchum',
+        image: profile
+    });
+
+    function User(state, action) {
+        const { data } = action;
+        return {
+            name: data.name,
+            image: data.image,
+        };
+    }
+
+    function handlePagination(count) {
+        const limit = {
+            '8': 8,
+            '12': 12,
+            '16': 16,
+            '20': 20
+        }
+        dispatchPagination({ actionType: 'alter', limit: limit[count] || 8 })
+    }
 
     function linkToSearch() {
         window.scrollTo({
@@ -26,32 +74,32 @@ export default function Home() {
         setLoading(true);
         const listPokemons = await findAll(8, 0).catch((error) => error);
         const { results } = listPokemons;
-        setLimit(8);
         setLoading(false);
         if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
                 <Card
-                    pokemon={pokemon}
-                    action={() => {
-                        setPokemon(pokemon);
-                        setShowModalPokemon(true)
-                    }}
+                pokemon={pokemon}
+                action={() => {
+                    setPokemon(pokemon);
+                    setShowModalPokemon(true)
+                }}
                 />));
-            setResearched(false);
-            setCard(pokemons);
-            return;
-        }
+                setResearched(false);
+                setCard(pokemons);
+                dispatchPagination({ actionType: 'next', offSet: 8 });
+                return;
+            }
         setCard(<Card />);
     }
 
     async function handleFindNext() {
-        if(loading) {
+        if (loading) {
             return;
         }
         setLoading(true);
-        const listPokemons = await findAll(8, limit).catch((error) => error);
+        const listPokemons = await findAll(pagination.limit, pagination.offSet).catch((error) => error);
         const { results } = listPokemons;
-        setLimit(limit+8);
+        dispatchPagination({ actionType: 'next', offSet: pagination.offSet + pagination.limit })
         setLoading(false);
         if (results && results.length > 0) {
             const pokemons = results.map((pokemon) => (
@@ -72,22 +120,21 @@ export default function Home() {
         setResearched(true);
         setLoading(true);
         name = name.toLowerCase();
-        const result = await findByName(name).catch((error) => error);
+        const pokemon = await findByName(name).catch((error) => error);
         setLoading(false);
-        if (result.status === 404) {
+        if (pokemon.status === 404) {
             setCard(<Card />);
             return;
         }
         const details = (
             <Card
-                pokemon={result}
+                pokemon={pokemon}
                 action={() => {
-                    setPokemon(result);
+                    setPokemon(pokemon);
                     setShowModalPokemon(true)
                 }}
             />);
         setCard([details]);
-        return;
     }
 
     async function handleFindType(url) {
@@ -112,7 +159,6 @@ export default function Home() {
             return;
         }
         setCard(<Card />);
-        return;
     }
 
     useEffect(() => {
@@ -121,7 +167,11 @@ export default function Home() {
 
     return (
         <ContainerHome>
-            <Header />
+            <Header
+                name={user.name}
+                urlImage={user.image}
+                actionLogin={() => setShowModalLogin(true)}
+            />
             <div className='body'>
                 <Landing
                     actionButton={linkToSearch}
@@ -131,6 +181,7 @@ export default function Home() {
                     actionNext={handleFindNext}
                     actionClear={handleFindAll}
                     actionFindType={(url) => handleFindType(url)}
+                    actionPagination={(count)=> handlePagination(count)}
                     cards={card}
                     researched={researched}
                     loading={loading}
@@ -141,6 +192,11 @@ export default function Home() {
                 show={showModalPokemon}
                 close={(() => setShowModalPokemon(false))}
                 pokemon={pokemon}
+            />
+            <ModalLogin
+                show={showModalLogin}
+                close={(() => setShowModalLogin(false))}
+                alterUser={(data) => dispatchUser({ data })}
             />
         </ContainerHome>
     )

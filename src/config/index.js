@@ -9,6 +9,10 @@ const config = {
         largScreen: {
             maxWidth: '1200px'
         },
+    },
+    dimensions: {
+        height: window.innerHeight,
+        width: window.innerWidth,
     }
 };
 

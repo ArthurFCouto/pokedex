@@ -3,20 +3,14 @@ import config from '../../config';
 
 const mobile = config.media.mobile.maxWidth;
 const tablet = config.media.tablet.maxWidth;
+const height = config.dimensions.height;
 const calcWidth = (value) => `${value * 100 / 200}%`;
 const backgroundColor = (value) => {
-    let color;
-    switch (value) {
-        case 'hp':
-            color = '#fb6c6c';
-            break;
-        case 'defense':
-            color = '#4bc07a';
-            break;
-        default:
-            color = '#48d0b0';
+    const color = {
+        hp: '#fb6c6c',
+        defense: '#4bc07a',
     }
-    return color;
+    return color[value] || '#48d0b0';
 };
 
 export const ContainerModal = styled.div`
@@ -92,8 +86,10 @@ export const ColumnImage = styled.section`
 
     @media(max-width: ${mobile}) {
         width: 100%;
-        height: 50%;
+        transition: height .5s;
+        height: ${(props) => props.imageView ? height / 2 + 'px' : height + 'px'};
         border-radius: 0 0 1rem 1rem;
+        cursor: pointer;
     }
 
 `;
@@ -187,4 +183,54 @@ export const Line = styled.hr`
     height: 2px;
     border-radius: var(--border-radius);
     background-color: ${(props) => backgroundColor(props.stat)};
+`;
+
+export const Form = styled.form`
+    padding: var(--padding-default);
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+
+    span {
+        width: 100%;
+        display: inline-flex;
+        justify-content: flex-end;
+        cursor: pointer;
+    }
+
+    h2 {
+        margin: 0.5rem 0;
+        white-space: nowrap;
+    }
+
+    .input {
+        justify-content: space-around;
+        margin: 1rem 0;
+        font-size: 1rem;
+        padding: 1rem 0.5rem;
+        border-radius: var(--border-radius);
+        background-color: var(--color-white);
+        box-shadow: var(--shadow-input);
+
+        input {
+            width: 80%;
+            background-color: transparent;
+            outline: 0;
+        }
+    }
+
+    p {
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+        background: white;
+        color: red;
+        border-radius: var(--border-radius);
+    }
+
+    div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+    }
 `;

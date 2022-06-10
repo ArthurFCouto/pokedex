@@ -52,8 +52,14 @@ export const List = styled.ul`
     }
 `;
 
-export const Name = styled.h2`
+export const Name = styled.div`
+    display: inline-flex;
     margin: 1rem 0;
+    cursor: pointer;
+
+    h2 {
+        margin-right: 0.5rem;
+    }
 `;
 
 export const Label = styled.h3`

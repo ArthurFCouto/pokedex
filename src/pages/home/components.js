@@ -31,15 +31,18 @@ export function Search({
     actionNext = () => { },
     actionClear = () => { },
     actionFindType = () => { },
+    actionPagination = () => { },
     cards = [],
     researched = false,
     loading = false }) {
     const [value, setValue] = useState('');
+    const [selected, setSelected] = useState(8);
     const [types, setTypes] = useState([]);
 
     function handleActionClear() {
         actionClear()
         setValue('');
+        setSelected(8);
     };
 
     function handleActionType(url) {
@@ -48,6 +51,11 @@ export function Search({
             setValue('');
         }
     };
+
+    function handleActionPagination(count) {
+        setSelected(count);
+        actionPagination(count);
+    }
 
     async function getAllTypes() {
         await getTypes().then((response) => setTypes(response.data)).catch((error) => console.log(error));
@@ -83,16 +91,22 @@ export function Search({
                                     <option key={'type'} value='type'>Tipo</option>
                                     {
                                         Array.isArray(types) &&
-                                            types.map((type) => (
-                                                <option key={type.name} value={type.url}>{type.name}</option>
-                                            ))
+                                        types.map((type) => (
+                                            <option key={type.name} value={type.url}>{type.name}</option>
+                                        ))
                                     }
+                                </select>
+                                <select onChange={(e) => handleActionPagination(e.target.value)} value={selected}>
+                                    <option key={8} value={8}>8</option>
+                                    <option key={12} value={12}>12</option>
+                                    <option key={16} value={16}>16</option>
+                                    <option key={20} value={20}>20</option>
                                 </select>
                             </li>
                         </ul>
                     </li>
-                    <li className='clear'>
-                        <IoRepeat onClick={() => handleActionClear()} />
+                    <li className='clear' onClick={() => handleActionClear()} >
+                        <IoRepeat />
                     </li>
                 </ul>
             </HeaderSearch>

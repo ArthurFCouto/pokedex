@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { IoClose, IoScale, IoEllipsisVertical, IoFlash } from 'react-icons/io5';
+import { IoClose, IoScale, IoEllipsisVertical, IoFlash, IoLogoGithub } from 'react-icons/io5';
 import {
     ContainerModal, BodyModal, ColumnImage,
-    ColumnDetails, InfoPokemon, StatsPokemon, Line
+    ColumnDetails, InfoPokemon, StatsPokemon, Line, Form
 } from './styles';
-import { capitalize } from '../../util';
+import { capitalize, gitHubLogin } from '../../util';
+import Button from '../button';
 
 export function ModalPokemon({ pokemon, show, close }) {
     const [display, setDisplay] = useState(false);
     const { abilities, id, image, height, name, types, weight, stats } = pokemon;
+    const [imageView, setimageView] = useState(false);
 
     useEffect(() => {
         setDisplay(show);
@@ -23,7 +25,7 @@ export function ModalPokemon({ pokemon, show, close }) {
                             <IoClose />
                         </h1>
                     </div>
-                    <ColumnImage types={types[0]} backgroundImage={image}>
+                    <ColumnImage types={types[0]} backgroundImage={image} imageView={imageView} onClick={() => setimageView(!imageView)}>
                         <div>
                             <ul>
                                 {
@@ -80,6 +82,57 @@ export function ModalPokemon({ pokemon, show, close }) {
                         </StatsPokemon>
                     </ColumnDetails>
                 </BodyModal>
+            </ContainerModal>
+        )
+        : null
+        ;
+}
+
+export function ModalLogin({ alterUser, show, close }) {
+    const [message, setMessage] = useState('');
+    const [user, setUser] = useState('');
+    const [display, setDisplay] = useState(false);
+
+    async function handleGetUser() {
+        const data = await gitHubLogin(user).catch((error) => error);
+        const { name } = data;
+        if (name) {
+            alterUser(data);
+            close();
+            return;
+        }
+        setMessage(data.data.message);
+        setUser('');
+    }
+
+    useEffect(() => {
+        setDisplay(show);
+    }, [show]);
+
+    return display
+        ? (
+            <ContainerModal >
+                <Form onSubmit={(e) => {
+                    e.preventDefault();
+                    handleGetUser();
+                }}>
+                    <span onClick={() => close()}><IoClose /></span>
+                    <h2>Digite seu usuário gitHub</h2>
+                    <div className='input'>
+                        <input type='search' placeholder='Ash_Ketchum' onChange={(e) => setUser(e.target.value)} />
+                        <IoLogoGithub />
+                    </div>
+                    {
+                        message && (
+                            <p>{
+                                message
+                            }</p>
+                        )
+                    }
+                    <div>
+                        <Button title='Enviar' typeButton='submit' />
+                    </div>
+                </Form>
             </ContainerModal>
         )
         : null

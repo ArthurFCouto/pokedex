@@ -68,7 +68,7 @@ export const HeaderSearch = styled.div`
             grid-template-columns: 3rem 1fr;
             align-items: center;
             height: 3rem;
-            width: 3rem;
+            width: 95%;
             margin: 1rem 0;
             padding: 0 1rem;
             border-radius: 100px;
@@ -76,8 +76,21 @@ export const HeaderSearch = styled.div`
             box-shadow: var(--shadow-input);
             transition: width .5s;
 
-            :hover {
-                width: 95%;
+            select {
+                margin: 0 0.5rem;
+                padding: 0.5rem 0;
+                width: 4rem;
+                text-align: end;
+                background-color: var(--color-primary);
+                border-radius: var(--border-radius);
+            }
+
+            @media(max-width: ${mobile}) {
+                width: 3rem;
+                
+                :hover {
+                    width: 95%;
+                }
             }
 
             ul {
@@ -108,8 +121,8 @@ export const CardList = styled.nav`
     column-gap: 10px;
     row-gap: 25px;
     justify-content: space-around;
-    opacity: ${(props)=> props.loading ? 0.5 : 1};
-    pointer-events: ${(props)=> props.loading ? 'none' : 'alto'};
+    opacity: ${(props) => props.loading ? 0.5 : 1};
+    pointer-events: ${(props) => props.loading ? 'none' : 'alto'};
 
     @media(max-width: ${mobile}) {
         column-gap: 5px;
@@ -171,7 +184,8 @@ export const ColumnRight = styled.div`
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 60%;
+            max-height: 60%;
+            max-width: 60%;
             animation: slideRight 2s;
         }
     }

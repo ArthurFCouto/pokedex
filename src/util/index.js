@@ -81,6 +81,11 @@ export async function findByTypes(url) {
     return data.response ? modelResponseError(data.response) : modelResponse(data);
 }
 
+export async function gitHubLogin(user) {
+    const data = await api.get(`https://api.github.com/users/${user}`).then((results) => results.data).catch((error) => error);
+    return data.response ? modelResponseError(data.response) : { name: data.name || data.login, image: data.avatar_url };
+}
+
 export function capitalize(value) {
     if (!isNaN(value)) {
         return value;
