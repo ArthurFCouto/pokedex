@@ -10,7 +10,7 @@ import profile from '../../assets/img/profile.png';
 
 export default function Home() {
     const [card, setCard] = useState([<></>]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [researched, setResearched] = useState(false);
     const [showModalPokemon, setShowModalPokemon] = useState(false);
     const [showModalLogin, setShowModalLogin] = useState(false);
@@ -83,12 +83,13 @@ export default function Home() {
                     setPokemon(pokemon);
                     setShowModalPokemon(true)
                 }}
-                />));
-                setResearched(false);
-                setCard(pokemons);
-                dispatchPagination({ actionType: 'next', offSet: 8 });
-                return;
-            }
+                />)
+            );
+            setCard(pokemons);
+            setResearched(false);
+            dispatchPagination({ actionType: 'next', offSet: 8 });
+            return;
+        }
         setCard(<Card />);
     }
 
@@ -109,7 +110,8 @@ export default function Home() {
                         setPokemon(pokemon);
                         setShowModalPokemon(true)
                     }}
-                />));
+                />)
+            );
             setCard([...card, pokemons]);
             return;
         }
@@ -154,7 +156,8 @@ export default function Home() {
                         setPokemon(pokemon);
                         setShowModalPokemon(true)
                     }}
-                />));
+                />)
+            );
             setCard(pokemons);
             return;
         }

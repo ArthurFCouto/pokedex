@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { IoClose, IoScale, IoEllipsisVertical, IoFlash, IoLogoGithub } from 'react-icons/io5';
 import {
     ContainerModal, BodyModal, ColumnImage,
-    ColumnDetails, InfoPokemon, StatsPokemon, Line, Form
+    ColumnDetails, InfoPokemon, StatsPokemon, Line, FormModal
 } from './styles';
 import { capitalize, gitHubLogin } from '../../util';
 import Button from '../button';
@@ -12,6 +12,11 @@ export function ModalPokemon({ pokemon, show, close }) {
     const { abilities, id, image, height, name, types, weight, stats } = pokemon;
     const [imageView, setimageView] = useState(false);
 
+    function handleClose() {
+        setimageView(false);
+        close();
+    }
+
     useEffect(() => {
         setDisplay(show);
     }, [show]);
@@ -20,12 +25,17 @@ export function ModalPokemon({ pokemon, show, close }) {
         ? (
             <ContainerModal >
                 <BodyModal >
-                    <div data-testid='close' className='close' onClick={() => close()} >
+                    <div data-testid='close' className='close' onClick={() => handleClose()} >
                         <h1>
                             <IoClose />
                         </h1>
                     </div>
-                    <ColumnImage types={types[0]} backgroundImage={image} imageView={imageView} onClick={() => setimageView(!imageView)}>
+                    <ColumnImage
+                        type={types[0]}
+                        backgroundImage={image}
+                        imageView={imageView}
+                        onClick={() => setimageView(!imageView)}
+                    >
                         <div>
                             <ul>
                                 {
@@ -112,7 +122,7 @@ export function ModalLogin({ alterUser, show, close }) {
     return display
         ? (
             <ContainerModal >
-                <Form onSubmit={(e) => {
+                <FormModal onSubmit={(e) => {
                     e.preventDefault();
                     handleGetUser();
                 }}>
@@ -132,7 +142,7 @@ export function ModalLogin({ alterUser, show, close }) {
                     <div>
                         <Button title='Enviar' typeButton='submit' />
                     </div>
-                </Form>
+                </FormModal>
             </ContainerModal>
         )
         : null

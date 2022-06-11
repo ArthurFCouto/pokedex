@@ -19,6 +19,14 @@ const theme = {
             rock: '#BAAB82',
             steel: '#417D9A',
             water: '#4A90DA',
+        },
+        backgroundStats: {
+            'hp': '#fb6c6c',
+            'attack': '#f29a99',
+            'defense': '#4bc07a',
+            'special-attack': '#e2a9a8',
+            'special-defense': '#63c288',
+            'speed': '#71af8b'
         }
     },
 }

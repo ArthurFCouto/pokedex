@@ -81,8 +81,6 @@ export const HeaderSearch = styled.div`
                 padding: 0.5rem 0;
                 width: 4rem;
                 text-align: end;
-                background-color: var(--color-primary);
-                border-radius: var(--border-radius);
             }
 
             @media(max-width: ${mobile}) {

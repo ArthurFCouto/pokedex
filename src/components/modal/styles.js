@@ -5,13 +5,6 @@ const mobile = config.media.mobile.maxWidth;
 const tablet = config.media.tablet.maxWidth;
 const height = config.dimensions.height;
 const calcWidth = (value) => `${value * 100 / 200}%`;
-const backgroundColor = (value) => {
-    const color = {
-        hp: '#fb6c6c',
-        defense: '#4bc07a',
-    }
-    return color[value] || '#48d0b0';
-};
 
 export const ContainerModal = styled.div`
     position: fixed;
@@ -41,8 +34,8 @@ export const BodyModal = styled.div`
         cursor: pointer;
 
         @media(max-width: ${mobile}) {
+            z-index: 5;
             top: 0;
-            z-index: 20;
             color: var(--color-white);
         }
     }
@@ -56,7 +49,7 @@ export const BodyModal = styled.div`
 
 export const ColumnImage = styled.section`
     width: 50%;
-    background-color: ${(props) => props.theme.colors.backgroundCard[props.types] || 'var(--color-dark)'};
+    background-color: ${(props) => props.theme.colors.backgroundCard[props.type] || 'var(--color-dark)'};
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-input);
     color: var(--color-white);
@@ -150,9 +143,8 @@ export const InfoPokemon = styled.ul`
     }
 
     li:nth-child(2) {
-        padding-left: 0.5rem;
+        padding: 0 1rem;
         border-left: 1px solid var(--color-dark);
-        padding-right: 0.5rem;
         border-right: 1px solid var(--color-dark);
     }
 
@@ -182,10 +174,10 @@ export const Line = styled.hr`
     width: ${(props) => calcWidth(props.value)};
     height: 2px;
     border-radius: var(--border-radius);
-    background-color: ${(props) => backgroundColor(props.stat)};
+    background-color: ${(props) => props.theme.colors.backgroundStats[props.stat] || 'var(--color-dark)'};
 `;
 
-export const Form = styled.form`
+export const FormModal = styled.form`
     padding: var(--padding-default);
     background-color: var(--color-primary);
     border-radius: var(--border-radius);
