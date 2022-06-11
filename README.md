@@ -47,7 +47,7 @@ Utilizei o create-react-app para a construção deste projeto, e a API REST util
 
 - A listagem por tipo está limitada a vinte pokemons pois ainda está sendo trabalhada a melhor forma de páginação, já que a api retorna todos os pokemons de uma vez.
 
--Não foi utilizado `typescript` devido a falta de dominio completo da linguagem.
+- Não foi utilizado `typescript` devido a falta de dominio completo da linguagem.
 
 ## :rocket: Tecnologias
 
