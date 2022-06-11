@@ -9,23 +9,23 @@
 
 Desenvolver uma plataforma web para listagem e visualização de pokemons e seus detalhes.
 
-Utilizei o create-react-app para a construção deste projeto, e a API REST utilizada para obter as informações sobre os pokemons foi a [PokéApi](https://pokeapi.co/).
+Utilizei o create-react-app para a construção deste projeto, e a API REST utilizada para obter as informações sobre os pokemons foi a [PokeApi](https://pokeapi.co/).
 
 ### Funcionalidades
 
-- :white_check_mark: **Listagem dos pokémons**: Listar os pokémons com o uso da API REST.
+- :white_check_mark: **Listagem dos pokemons**: Listar os pokemons com o uso da API REST.
 
-- :white_check_mark: **Ampliar a listagem dos pokémons**: Método para adicionar mais pokémons a lista, ampliando-se a quantia de pokémons mostrada ao usuário de acordo com a quantidade definida pelo mesmo.
+- :white_check_mark: **Ampliar a listagem dos pokemons**: Método para adicionar mais pokemons a lista, ampliando-se a quantia de pokemons mostrada ao usuário de acordo com a quantidade definida pelo mesmo.
 
-- :ballot_box_with_check: **Listagem dos por tipo**: Listar os vinte primeiros pokémons filtrando por tipo.
+- :ballot_box_with_check: **Listagem dos pokemons por tipo**: Listar os vinte primeiros pokemons filtrando por tipo.
 
-- :white_check_mark: **Buscar pokémons**: Método para apenas um pokemon pelo seu nome/id.
+- :white_check_mark: **Buscar pokemons**: Método para mostrar apenas um pokemon pelo seu nome/id.
 
-- :white_check_mark: **Efeito no cartão do pokémon**: Criar uma animação ao usuário quando passar o mouse sobre o cartão.
+- :white_check_mark: **Efeito no card do pokemon**: Criar uma animação ao usuário quando passar o mouse sobre o card.
 
-- :white_check_mark: **Selecionar pokémon**: Exibe um modal com mais detalhes sobre o pokémon escolhido, com opção de ampliar a foto.
+- :white_check_mark: **Selecionar pokemon**: Exibe um modal com mais detalhes sobre o pokemon escolhido, com opção de ampliar a foto.
 
-- :white_check_mark: **Usuário do GitHub**: É possível informar seu usuário do GitHub para poder exiibir sua foto e nome do perfil na página.
+- :white_check_mark: **Usuário do GitHub**: É possível informar seu usuário do GitHub para exibir sua foto e nome do perfil na página.
 
 ### Conceitos abordados
 
@@ -39,9 +39,9 @@ Utilizei o create-react-app para a construção deste projeto, e a API REST util
 
 - Consumo de api com o uso da lib [axios](https://github.com/axios/axios).
 
-- Controle de paginação na listagem dos pokémons.
+- Controle de paginação na listagem dos pokemons (consumo da api).
 
-- Criando tema global de cores com o `createGlobalStyle` do [styled-components](https://www.styled-components.com/).
+- Criando tema global com o `createGlobalStyle` do [styled-components](https://www.styled-components.com/).
 
 ### Notas :label:
 
