@@ -20,11 +20,11 @@ async function modelResponse(data) {
         const src = url ? url.slice(26, url.length - 1) : pokemon.url.slice(26, pokemon.url.length - 1);
         const details = await api.get(src).then((results) => results.data).catch((error) => error);
         if (details.response) {
-            console.log('Houve um erro ao buscar os detalhes do pokemon: ', details.response);
+            console.log('Houve um erro ao buscar os detalhes de um pokemon: ', details.response);
             continue;
         }
         results.push(modelResponsePokemon(details));
-        if(pokemon && results.length === 12) {
+        if (pokemon && results.length === 20) {
             break;
         }
     }
@@ -44,14 +44,14 @@ function modelResponsePokemon(data) {
     const types = typesDetails.map((item) => item.type.name);
     const stats = statsDetails.map((item) => ({ base_stat: item.base_stat, name: item.stat.name }));
     return {
-        image,
+        id,
+        name,
         abilities,
         moves,
         types,
+        image,
         stats,
         height,
-        id,
-        name,
         weight
     }
 };
@@ -64,15 +64,16 @@ export async function findByName(search) {
 export async function findAll(limit, offset) {
     const data = await api.get('pokemon', {
         params: {
-          limit: limit,
-          offset: offset,
-        }}).then((results) => results.data).catch((error) => error);
+            limit: limit,
+            offset: offset,
+        }
+    }).then((results) => results.data).catch((error) => error);
     return data.response ? modelResponseError(data.response) : modelResponse(data);
 }
 
 export async function getTypes() {
     const data = await api.get('type').then((results) => results.data).catch((error) => error);
-    return data.response ? modelResponseError(data.response) : {data: data.results};
+    return data.response ? modelResponseError(data.response) : { data: data.results };
 }
 
 export async function findByTypes(url) {

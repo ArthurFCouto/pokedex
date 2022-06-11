@@ -8,10 +8,10 @@ const NAME = 'Pikachu';
 
 describe('Testando o component Header', () => {
 
-    it('Verifica se a imagem é exibida', () => {
+    it('Verifica se a imagem é exibida por default', () => {
         render(<Header />);
         const imageElement = screen.queryByAltText(NAME_DEFAULT);
-        expect(imageElement).toBeInTheDocument();
+        expect(imageElement).not.toBeInTheDocument();
     });
 
     it('Verifica se a url enviada na props é exibida', () => {
@@ -22,8 +22,8 @@ describe('Testando o component Header', () => {
 
     it('Verifica se exibe o nome default', () => {
         render(<Header />);
-        const strongElement = screen.getByText(NAME_DEFAULT);
-        expect(strongElement).toBeInTheDocument();
+        const strongElement = screen.queryByText(NAME_DEFAULT);
+        expect(strongElement).not.toBeInTheDocument();
     });
 
     it('Verifica se o nome enviado na props é exibido', () => {

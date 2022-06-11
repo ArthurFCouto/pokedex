@@ -1,7 +1,14 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../../../config/theme';
 import Card from '../../card';
 
+const MockCard = ({pokemon, action})=> (
+    <ThemeProvider theme={theme}>
+        <Card pokemon={pokemon} action={action} />
+    </ThemeProvider>
+)
 const POKEMON = {
     image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
     abilities: [
@@ -38,21 +45,21 @@ const mockAction = () => {
 describe('Testando o component Card', () => {
 
     it('Verificando se as informações do pokemon são repassadas via props', () => {
-        render(<Card pokemon={POKEMON} />);
+        render(<MockCard pokemon={POKEMON} />);
         const name = POKEMON.name;
         const expectElement = screen.getByText(name[0].toUpperCase() + name.substring(1).toLowerCase());
         expect(expectElement).toBeInTheDocument();
     });
 
     it('Verificando se são exibidas todos os types do pokemon', () => {
-        render(<Card pokemon={POKEMON} />);
+        render(<MockCard pokemon={POKEMON} />);
         const count = POKEMON.types;
         const types = screen.getAllByTestId('types');
         expect(types.length).toBe(count.length);
     });
 
     it('Verificando se a função é repassada', () => {
-        render(<Card pokemon={POKEMON} action={mockAction} />);
+        render(<MockCard pokemon={POKEMON} action={mockAction} />);
         const expectElement = screen.getByTitle(POKEMON.name);
         fireEvent.click(expectElement);
         const h1Element = screen.queryByText(VALUE_EXPECT);
@@ -60,7 +67,7 @@ describe('Testando o component Card', () => {
     });
 
     it('Verificando se é enviado o card de NotFound', () => {
-        render(<Card />);
+        render(<MockCard />);
         const expectElement = screen.getByText('#404');
         expect(expectElement).toBeInTheDocument();
     });

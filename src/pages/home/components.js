@@ -6,7 +6,7 @@ import {
     ColumnLeft, ColumnRight, ContainerLanding,
     CardList, HeaderSearch, ContainerSearch
 } from './styles';
-import { getTypes } from '../../util';
+import { capitalize, getTypes } from '../../util';
 
 export function Landing({ actionButton = () => { } }) {
     return (
@@ -93,7 +93,7 @@ export function Search({
                                     {
                                         Array.isArray(types) &&
                                         types.map((type) => (
-                                            <option key={type.name} value={type.url}>{type.name}</option>
+                                            <option key={type.name} value={type.url}>{capitalize(type.name)}</option>
                                         ))
                                     }
                                 </select>

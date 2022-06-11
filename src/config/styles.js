@@ -6,20 +6,20 @@ const mobile = config.media.mobile.maxWidth;
 const GlobalStyle = createGlobalStyle`
     :root {
         --font-body:  'Roboto', 'Lato', 'Poppins', 'Montserrat', sans-serif;
+        --border-radius: 1rem;
         --color-primary: #efefef;
+        --color-dark: #424242;
         --color-button: #48d0b0;
         --color-button-hover: #3ba58c;
         --color-black-50: rgba(0, 0, 0, 0.25);
         --color-white: #ffffff;
         --color-white-15: rgba(255, 255, 255, 0.15);
         --color-white-50: rgba(255, 255, 255, 0.5);
-        --color-dark: #424242;
         --maxWidth-card: 250px;
         --minWidth-card: 160px;
         --shadow-card: 0 0.3rem 0.5rem #424242;
         --shadow-profile: 0 0 0.3rem #ffffff;
         --shadow-input: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.25);
-        --border-radius: 1rem;
         --weight-bold: bold;
         --padding-default: 1rem 1.5rem;
         --lt-spacing: 0.2rem;
@@ -46,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1;
     }
 
-    ol, ul {
+    ul {
         list-style: none;
     }
   

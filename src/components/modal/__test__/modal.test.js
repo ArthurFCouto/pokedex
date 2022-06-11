@@ -1,8 +1,15 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../../../config/theme';
 import { capitalize } from '../../../util';
 import { ModalPokemon } from '../../modal';
 
+const MockModal = ({ close, pokemon, show }) => (
+    <ThemeProvider theme={theme}>
+        <ModalPokemon close={close} pokemon={pokemon} show={show} />
+    </ThemeProvider>
+)
 const POKEMON = {
     image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
     abilities: [
@@ -39,33 +46,33 @@ const mockAction = () => {
 describe('Testando o component Modal', () => {
 
     it('Verificando se as informações do pokemon são repassadas via props', () => {
-        render(<ModalPokemon pokemon={POKEMON} show={true} />);
+        render(<MockModal pokemon={POKEMON} show={true} />);
         const expectElement = screen.getByText(capitalize(POKEMON.name));
         expect(expectElement).toBeInTheDocument();
     });
 
     it('Verificando se é retirado do DOM quando solicitado', () => {
-        render(<ModalPokemon pokemon={POKEMON} show={false} />);
+        render(<MockModal pokemon={POKEMON} show={false} />);
         const expectElement = screen.queryByText(capitalize(POKEMON.name));
         expect(expectElement).not.toBeInTheDocument();
     });
 
     it('Verificando se é feito o map no types', () => {
-        render(<ModalPokemon pokemon={POKEMON} show={true} />);
+        render(<MockModal pokemon={POKEMON} show={true} />);
         const [, text] = POKEMON.types;
         const expectElement = screen.getByText(capitalize(text));
         expect(expectElement).toBeInTheDocument();
     });
 
     it('Verificando se é feito o map no stats', () => {
-        render(<ModalPokemon pokemon={POKEMON} show={true} />);
-        const [{name}] = POKEMON.stats;
+        render(<MockModal pokemon={POKEMON} show={true} />);
+        const [{ name }] = POKEMON.stats;
         const expectElement = screen.getByText(name);
         expect(expectElement).toBeInTheDocument();
     });
 
     it('Verificando se a função é repassada o onClose', () => {
-        render(<ModalPokemon pokemon={POKEMON} show={true} close={mockAction} />);
+        render(<MockModal pokemon={POKEMON} show={true} close={mockAction} />);
         const buttonElement = screen.getByTestId('close');
         fireEvent.click(buttonElement);
         const h1Element = screen.queryByText(VALUE_EXPECT);
