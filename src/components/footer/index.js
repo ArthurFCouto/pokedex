@@ -5,9 +5,11 @@ import pokemon from '../../assets/img/pokemon.png';
 export default function Footer() {
     return (
         <ContainerFooter>
-            <img src={pokemon} alt='Pokemon' />
+            <img
+                src={pokemon}
+                alt='Pokemon' />
             <Info data-testid='aside'>
-                <h5>© 2022 Developed and created by Arthur Couto</h5>
+                <h5>© 2022 Developed by Arthur Couto</h5>
                 <ul>
                     <li data-testid='li'>
                         <a href='https://github.com/ArthurFCouto/'><FaGithub /></a>

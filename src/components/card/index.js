@@ -3,7 +3,10 @@ import pokeball from '../../assets/img/pokeball-3.png'
 import { capitalize } from '../../util';
 
 const cardNotFount = (
-    <Container title='Não encontrado' types='error' className='revealCard'>
+    <Container
+        title='Não encontrado'
+        types='error'
+        className='revealCard' >
         <Title>Ops!</Title>
         <Types>Tivemos um</Types>
         <Types>probleminha</Types>
@@ -21,7 +24,11 @@ export default function Card({ pokemon, action = () => { } }) {
     try {
         const { name, types, id, image } = pokemon;
         return (
-            <Container title={name} types={types[0]} onClick={() => action()} className='revealCard'>
+            <Container
+                title={name}
+                types={types[0]}
+                onClick={() => action()}
+                className='revealCard' >
                 <Title>{capitalize(name)}</Title>
                 {
                     types.map((type, index) => (

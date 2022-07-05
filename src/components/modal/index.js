@@ -25,7 +25,10 @@ export function ModalPokemon({ pokemon, show, close }) {
         ? (
             <ContainerModal >
                 <BodyModal >
-                    <div data-testid='close' className='close' onClick={() => handleClose()} >
+                    <div
+                        data-testid='close'
+                        className='close'
+                        onClick={() => handleClose()} >
                         <h1>
                             <IoClose />
                         </h1>
@@ -34,8 +37,7 @@ export function ModalPokemon({ pokemon, show, close }) {
                         type={types[0]}
                         backgroundImage={image}
                         imageView={imageView}
-                        onClick={() => setimageView(!imageView)}
-                    >
+                        onClick={() => setimageView(!imageView)} >
                         <div>
                             <ul>
                                 {
@@ -84,7 +86,9 @@ export function ModalPokemon({ pokemon, show, close }) {
                                         <h4>{stat.name}</h4>
                                         <h4>{stat.base_stat}</h4>
                                         <div>
-                                            <Line value={stat.base_stat} stat={stat.name} />
+                                            <Line
+                                                value={stat.base_stat}
+                                                stat={stat.name} />
                                         </div>
                                     </li>
                                 ))
@@ -116,6 +120,7 @@ export function ModalLogin({ alterUser, show, close }) {
     }
 
     useEffect(() => {
+        setMessage('');
         setDisplay(show);
     }, [show]);
 
@@ -129,18 +134,19 @@ export function ModalLogin({ alterUser, show, close }) {
                     <span onClick={() => close()}><IoClose /></span>
                     <h2>Digite seu usuário gitHub</h2>
                     <div className='input'>
-                        <input type='search' placeholder='Ash_Ketchum' onChange={(e) => setUser(e.target.value)} />
+                        <input
+                            type='search'
+                            placeholder='Ash_Ketchum'
+                            onChange={(e) => setUser(e.target.value)} />
                         <IoLogoGithub />
                     </div>
                     {
-                        message && (
-                            <p>{
-                                message
-                            }</p>
-                        )
+                        message && (<p>{message}</p>)
                     }
                     <div>
-                        <Button title='Enviar' typeButton='submit' />
+                        <Button
+                            title='Login'
+                            typeButton='submit' />
                     </div>
                 </FormModal>
             </ContainerModal>

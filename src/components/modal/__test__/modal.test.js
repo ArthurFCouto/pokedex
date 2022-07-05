@@ -5,11 +5,6 @@ import theme from '../../../config/theme';
 import { capitalize } from '../../../util';
 import { ModalPokemon } from '../../modal';
 
-const MockModal = ({ close, pokemon, show }) => (
-    <ThemeProvider theme={theme}>
-        <ModalPokemon close={close} pokemon={pokemon} show={show} />
-    </ThemeProvider>
-)
 const POKEMON = {
     image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
     abilities: [
@@ -35,6 +30,14 @@ const POKEMON = {
     weight: 69
 };
 const VALUE_EXPECT = 'Hello World!';
+const MockModal = ({ close, pokemon, show }) => (
+    <ThemeProvider theme={theme}>
+        <ModalPokemon
+            close={close}
+            pokemon={pokemon}
+            show={show} />
+    </ThemeProvider>
+)
 const mockAction = () => {
     const h1 = document.createElement('h1');
     const text = document.createTextNode(VALUE_EXPECT);

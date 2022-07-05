@@ -15,10 +15,11 @@ export const Container = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    row-gap: 5px;
     align-items: baseline;
+    row-gap: 5px;
     overflow: hidden;
-    transition: box-shadow .2s;
+    cursor: pointer;
+    transition: all .2s;
     animation: fadeIn 1s;
 
     .id {
@@ -28,7 +29,6 @@ export const Container = styled.div`
         color: initial;
         opacity: 0.3;
         font-weight: var(--weight-bold);
-        cursor: default;
     }
 
     .image {
@@ -37,7 +37,8 @@ export const Container = styled.div`
         right: .5rem;
         width: 50%;
         height: 50%;
-        z-index: 15;
+        // z-index: 15;
+        transition: transform .2s;
     }
 
     .notFound {
@@ -50,10 +51,11 @@ export const Container = styled.div`
 
     :hover {
         box-shadow: var(--shadow-card);
-    }
+        transform: translateY(-5px);
 
-    p {
-        width: 60%;
+        .image {
+            transform: scale(1.05);
+        }
     }
 
     @media(max-width: ${mobile}) {
@@ -69,7 +71,6 @@ export const Container = styled.div`
 export const Title = styled.h3`
     margin-top: 1rem;
     letter-spacing: var(--lt-spacing);
-    cursor: pointer;
 
     @media(min-width: ${mobile}) {
         font-weight: var(--weight-bold);
@@ -85,5 +86,4 @@ export const Types = styled.h5`
     background-color: var(--color-white-15);
     padding: 0.3rem 0.7rem;
     border-radius: 0.5rem;
-    cursor: default;
 `;

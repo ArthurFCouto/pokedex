@@ -5,13 +5,13 @@
   <img alt="Pokedex logo" src="./src/assets/img/printscreen.png" width="400px" />
 </p>
 
-## O Projeto :computer: 
+## :computer: O Projeto
 
 Desenvolver uma plataforma web para listagem e visualização de pokemons e seus detalhes.
 
 Utilizei o create-react-app para a construção deste projeto, e a API REST utilizada para obter as informações sobre os pokemons foi a [PokeApi](https://pokeapi.co/).
 
-### Funcionalidades
+### :gear: Funcionalidades
 
 - :white_check_mark: **Listagem dos pokemons**: Listar os pokemons com o uso da API REST.
 
@@ -27,7 +27,7 @@ Utilizei o create-react-app para a construção deste projeto, e a API REST util
 
 - :white_check_mark: **Usuário do GitHub**: É possível informar seu usuário do GitHub para exibir sua foto e nome do perfil na página.
 
-### Conceitos abordados
+### :bookmark_tabs: Conceitos abordados
 
 - Uso de flexbox para alinhar e ajustar elementos na página.
 
@@ -41,9 +41,9 @@ Utilizei o create-react-app para a construção deste projeto, e a API REST util
 
 - Controle de paginação na listagem dos pokemons (consumo da api).
 
-- Criando tema global com o `createGlobalStyle` do [styled-components](https://www.styled-components.com/).
+- Criação de tema global com o `createGlobalStyle` do [styled-components](https://www.styled-components.com/).
 
-### Notas :label:
+### :label: Notas
 
 - A listagem por tipo está limitada a vinte pokemons pois ainda está sendo trabalhada a melhor forma de páginação, já que a api retorna todos os pokemons de uma vez.
 

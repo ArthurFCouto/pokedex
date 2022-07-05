@@ -1,5 +1,11 @@
 import api from '../service';
 
+/*
+    Este valor serve como ponto de inicio para extrari parte das URLs enviadas
+    O axios já possui o caminho raiz da API
+*/
+const index = 26;
+
 function modelResponseError(error) {
     const { data, status, statusText } = error;
     return new Promise((resolve, reject) => {
@@ -11,22 +17,25 @@ function modelResponseError(error) {
     });
 }
 
-async function modelResponse(data) {
-    const { count, next, previous, pokemon } = data;
-    const list = pokemon || data.results;
+/*
+    Método adaptado para tratar as respostas vindas da lista de todos os pokemons e da lista de pokemons por tipo
+*/
+async function modelResponseList(data) {
+    const { count, next, previous } = data;
+    const list = data.pokemon || data.results;
     const results = [];
     for (let item of list) {
         const { url, pokemon } = item;
-        const src = url ? url.slice(26, url.length - 1) : pokemon.url.slice(26, pokemon.url.length - 1);
+        const src = url ? url.slice(index, url.length - 1) : pokemon.url.slice(index, pokemon.url.length - 1);
         const details = await api.get(src).then((results) => results.data).catch((error) => error);
-        if (details.response) {
-            console.log('Houve um erro ao buscar os detalhes de um pokemon: ', details.response);
+        if (details.response)
             continue;
-        }
         results.push(modelResponsePokemon(details));
-        if (pokemon && results.length === 20) {
+        /*
+            Se houver a variável pokemon, está sendo pesquisado por type, por enquanto só está sendo listado os 20 pirmeiros
+        */
+        if (pokemon && results.length === 20)
             break;
-        }
     }
     return {
         count,
@@ -37,8 +46,19 @@ async function modelResponse(data) {
 };
 
 function modelResponsePokemon(data) {
-    const { abilities: abilitiesDetails, forms, game_indices, height, id, moves: movesDetails, name, sprites, types: typesDetails, weight, stats: statsDetails } = data;
-    const image = sprites.other.dream_world.front_default;
+    const {
+        abilities: abilitiesDetails,
+        forms,
+        game_indices,
+        height,
+        id,
+        moves: movesDetails,
+        name,
+        sprites,
+        stats: statsDetails,
+        types: typesDetails,
+        weight } = data;
+    const image = sprites.other.dream_world.front_default || sprites.front_default;
     const abilities = abilitiesDetails.map((item) => item.ability.name);
     const moves = movesDetails.map((item) => item.move.name);
     const types = typesDetails.map((item) => item.type.name);
@@ -61,14 +81,14 @@ export async function findByName(search) {
     return data.response ? modelResponseError(data.response) : modelResponsePokemon(data);
 }
 
-export async function findAll(limit, offset) {
+export async function findAll(limit = 8, offset = 0) {
     const data = await api.get('pokemon', {
         params: {
             limit: limit,
             offset: offset,
         }
     }).then((results) => results.data).catch((error) => error);
-    return data.response ? modelResponseError(data.response) : modelResponse(data);
+    return data.response ? modelResponseError(data.response) : modelResponseList(data);
 }
 
 export async function getTypes() {
@@ -77,9 +97,9 @@ export async function getTypes() {
 }
 
 export async function findByTypes(url) {
-    const src = url.slice(26, url.length - 1);
+    const src = url.slice(index, url.length - 1);
     const data = await api.get(src).then((results) => results.data).catch((error) => error);
-    return data.response ? modelResponseError(data.response) : modelResponse(data);
+    return data.response ? modelResponseError(data.response) : modelResponseList(data);
 }
 
 export async function gitHubLogin(user) {

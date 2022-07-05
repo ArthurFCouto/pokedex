@@ -16,7 +16,7 @@ export const ContainerModal = styled.div`
     place-items: center;
     background-color: var(--color-black-50);
     z-index: 15;
-`;
+    `;
 
 export const BodyModal = styled.div`
     position: relative;
@@ -26,6 +26,7 @@ export const BodyModal = styled.div`
     background-color: var(--color-white);
     border-radius: var(--border-radius);
     transition: all .2s;
+    cursor: default;
 
     .close {
         position: absolute;
@@ -45,7 +46,7 @@ export const BodyModal = styled.div`
         height: 100%;
         border-radius: 0;
     }
-`;
+    `;
 
 export const ColumnImage = styled.section`
     width: 50%;
@@ -72,16 +73,15 @@ export const ColumnImage = styled.section`
                 background-color: var(--color-white-15);
                 padding: 0.3rem 0.7rem;
                 border-radius: 0.5rem;
-                cursor: default;
             }
         }
     }
 
     @media(max-width: ${mobile}) {
         width: 100%;
-        transition: height .5s;
         height: ${(props) => props.imageView ? height + 'px' : height / 2 + 'px'};
         border-radius: 0 0 1rem 1rem;
+        transition: height .5s;
         cursor: pointer;
     }
 
@@ -99,7 +99,6 @@ export const ColumnDetails = styled.div`
         color: initial;
         opacity: 0.3;
         font-weight: var(--weight-bold);
-        cursor: default;
     }
 
     h2 {
@@ -187,6 +186,11 @@ export const FormModal = styled.form`
         display: inline-flex;
         justify-content: flex-end;
         cursor: pointer;
+        transition: color .2s;
+
+        :hover {
+            color: var(--color-button-hover);
+        }
     }
 
     h2 {
@@ -195,16 +199,16 @@ export const FormModal = styled.form`
     }
 
     .input {
-        justify-content: space-around;
+        justify-content: space-between;
         margin: 1rem 0;
         font-size: 1rem;
-        padding: 1rem 0.5rem;
+        padding: 1rem;
         border-radius: var(--border-radius);
         background-color: var(--color-white);
         box-shadow: var(--shadow-input);
 
         input {
-            width: 80%;
+            width: 100%;
             background-color: transparent;
             outline: 0;
         }

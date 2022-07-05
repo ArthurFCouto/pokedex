@@ -1,14 +1,10 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
+import { capitalize } from '../../../util';
 import theme from '../../../config/theme';
 import Card from '../../card';
 
-const MockCard = ({pokemon, action})=> (
-    <ThemeProvider theme={theme}>
-        <Card pokemon={pokemon} action={action} />
-    </ThemeProvider>
-)
 const POKEMON = {
     image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
     abilities: [
@@ -34,6 +30,11 @@ const POKEMON = {
     weight: 69
 };
 const VALUE_EXPECT = 'Hello World!';
+const MockCard = ({pokemon, action})=> (
+    <ThemeProvider theme={theme}>
+        <Card pokemon={pokemon} action={action} />
+    </ThemeProvider>
+)
 const mockAction = () => {
     const h1 = document.createElement('h1');
     const text = document.createTextNode(VALUE_EXPECT);
@@ -46,8 +47,8 @@ describe('Testando o component Card', () => {
 
     it('Verificando se as informações do pokemon são repassadas via props', () => {
         render(<MockCard pokemon={POKEMON} />);
-        const name = POKEMON.name;
-        const expectElement = screen.getByText(name[0].toUpperCase() + name.substring(1).toLowerCase());
+        const name = capitalize(POKEMON.name);
+        const expectElement = screen.getByText(name);
         expect(expectElement).toBeInTheDocument();
     });
 
