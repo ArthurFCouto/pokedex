@@ -30,17 +30,8 @@ const RESULT_GIT = {
     user: 'arthurfcouto',
     name: 'Arthur Couto'
 };
-const RESULT_ERROR_GIT = {
-    data: {
-        message: 'Not Found',
-        documentation_url: 'https://docs.github.com/rest/reference/users#get-a-user',
-    },
-    status: 404,
-    statusText: 'Not Found'
-};
-const RESULT_LIST_KEYS = [
-    'count', 'next', 'previous', 'results'
-];
+const RESULT_ERROR_GIT_KEYS = ['data', 'status', 'statusText'];
+const RESULT_LIST_KEYS = ['count', 'next', 'previous', 'results'];
 const RESULT_NOT_FOUND = {
     data: 'Not Found',
     status: 404,
@@ -104,6 +95,7 @@ describe('Testando as funções da pasta util', () => {
 
     it('Verificando se é retornado um erro padrão para a função login no GitHub', async () => {
         const data = await gitHubLogin('q w e r t y').then((response) => response).catch((error) => error);
-        expect(data).toEqual(RESULT_ERROR_GIT);
+        const keys = Object.keys(data);
+        expect(keys).toEqual(RESULT_ERROR_GIT_KEYS);
     }, 30000);
 })

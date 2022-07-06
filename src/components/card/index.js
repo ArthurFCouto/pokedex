@@ -23,10 +23,11 @@ const cardNotFount = (
 export default function Card({ pokemon, action = () => { } }) {
     try {
         const { name, types, id, image } = pokemon;
+        const backgroundColor = types[0] === 'normal' && types.length > 1 ? types[1] : types[0];
         return (
             <Container
                 title={name}
-                types={types[0]}
+                bgColor={backgroundColor}
                 onClick={() => action()}
                 className='revealCard' >
                 <Title>{capitalize(name)}</Title>

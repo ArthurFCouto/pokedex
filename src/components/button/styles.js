@@ -10,9 +10,9 @@ export const Container = styled.button`
     padding: var(--padding-default);
     border-radius: 0.5rem;
     background-color: var(--color-button);
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--color-white);
-    transition: all .2s;
+    transition: background-color .2s;
     cursor: pointer;
 
     :hover {

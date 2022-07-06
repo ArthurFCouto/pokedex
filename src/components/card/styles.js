@@ -11,7 +11,7 @@ export const Container = styled.div`
     border-radius: var(--border-radius);
     padding: 1rem;
     color: var(--color-white);
-    background-color: ${(props) => props.theme.colors.backgroundCard[props.types] || 'var(--color-dark)'};
+    background-color: ${(props) => props.theme.colors.backgroundCard[props.bgColor] || 'var(--color-dark)'};
     position: relative;
     display: flex;
     flex-direction: column;
