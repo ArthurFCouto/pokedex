@@ -10,7 +10,6 @@ import Button from '../button';
 export function ModalPokemon({ pokemon, show, close }) {
     const [display, setDisplay] = useState(false);
     const { abilities, id, image, height, name, types, weight, stats } = pokemon;
-    const backgroundColor = types[0] === 'normal' && types.length > 1 ? types[1] : types[0];
     const [imageView, setimageView] = useState(false);
 
     function handleClose() {
@@ -35,7 +34,7 @@ export function ModalPokemon({ pokemon, show, close }) {
                         </h1>
                     </div>
                     <ColumnImage
-                        bgColor={backgroundColor}
+                        types={types}
                         backgroundImage={image}
                         imageView={imageView}
                         onClick={() => setimageView(!imageView)} >

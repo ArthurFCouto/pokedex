@@ -5,6 +5,11 @@ const mobile = config.media.mobile.maxWidth;
 const tablet = config.media.tablet.maxWidth;
 const height = config.dimensions.height;
 const calcWidth = (value) => `${value * 100 / 200}%`;
+const bgColor = (props)=> {
+    const { types } = props;
+    const type = types[0] === 'normal' && types.length > 1 ? types[1] : types[0];
+    return props.theme.colors.backgroundCard[type] || 'var(--color-dark)';
+}
 
 export const ContainerModal = styled.div`
     position: fixed;
@@ -50,7 +55,7 @@ export const BodyModal = styled.div`
 
 export const ColumnImage = styled.section`
     width: 50%;
-    background-color: ${(props) => props.theme.colors.backgroundCard[props.bgColor] || 'var(--color-dark)'};
+    background-color: ${(props) => bgColor(props)};
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-input);
     color: var(--color-white);
